@@ -10,6 +10,7 @@ import XCTest
 final class xcuitest_sample_projUITests: Base {
     
     let homePage = HomePage()
+    let displayPage = DisplayBrightness()
 
     func testGentleSwipeExample() {
         app.performGentleSwipe(.up, TestConstants.SwipeAdjustment.small)
@@ -19,7 +20,13 @@ final class xcuitest_sample_projUITests: Base {
         app.performGentleSwipe(.up, TestConstants.SwipeAdjustment.veryBig)
     }
     
-    func testOpenDeveloperOptions() {
-        homePage.openDeveloperOptions()
+    func testChangeBrightness() {
+        homePage.openDisplayAndBrightness()
+        displayPage.setBrightnessMin()
+        sleep(2)
+        displayPage.setBrightnessMax()
+        sleep(2)
+        displayPage.setBrightnessHalf()
+        sleep(2)
     }
 }

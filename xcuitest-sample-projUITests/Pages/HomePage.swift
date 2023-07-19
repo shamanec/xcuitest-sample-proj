@@ -14,4 +14,11 @@ class HomePage: Base {
     func openDeveloperOptions() {
         cells.element(withLabelMatching: "Developer").tap()
     }
+    
+    func openDisplayAndBrightness() {
+        cells.element(withLabelContaining: "Brightness").tap()
+        print(app.debugDescription)
+    }
+    
+    
 }

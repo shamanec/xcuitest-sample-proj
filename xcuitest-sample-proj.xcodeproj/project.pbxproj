@@ -10,6 +10,7 @@
 		FF4D5CB02A68033C00B52624 /* ElementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D5CAF2A68033C00B52624 /* ElementsHelper.swift */; };
 		FF4D5CB22A680D3C00B52624 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D5CB12A680D3C00B52624 /* HomePage.swift */; };
 		FF4D5CB42A68146700B52624 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D5CB32A68146700B52624 /* Utils.swift */; };
+		FF4D5CB82A682BB100B52624 /* DisplayBrightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D5CB72A682BB100B52624 /* DisplayBrightness.swift */; };
 		FF79C1E82A66F1B600BBC60A /* xcuitest_sample_projApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C1E72A66F1B600BBC60A /* xcuitest_sample_projApp.swift */; };
 		FF79C1EA2A66F1B600BBC60A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C1E92A66F1B600BBC60A /* ContentView.swift */; };
 		FF79C1EC2A66F1B700BBC60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF79C1EB2A66F1B700BBC60A /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		FF4D5CAF2A68033C00B52624 /* ElementsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementsHelper.swift; sourceTree = "<group>"; };
 		FF4D5CB12A680D3C00B52624 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		FF4D5CB32A68146700B52624 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		FF4D5CB72A682BB100B52624 /* DisplayBrightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBrightness.swift; sourceTree = "<group>"; };
 		FF79C1E42A66F1B600BBC60A /* xcuitest-sample-proj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xcuitest-sample-proj.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF79C1E72A66F1B600BBC60A /* xcuitest_sample_projApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xcuitest_sample_projApp.swift; sourceTree = "<group>"; };
 		FF79C1E92A66F1B600BBC60A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				FF4D5CB12A680D3C00B52624 /* HomePage.swift */,
+				FF4D5CB72A682BB100B52624 /* DisplayBrightness.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				FF79C2032A66F1B700BBC60A /* xcuitest_sample_projUITests.swift in Sources */,
 				FF79C2892A66F9F500BBC60A /* InteractionHelper.swift in Sources */,
 				FF4D5CB42A68146700B52624 /* Utils.swift in Sources */,
+				FF4D5CB82A682BB100B52624 /* DisplayBrightness.swift in Sources */,
 				FF4D5CB02A68033C00B52624 /* ElementsHelper.swift in Sources */,
 				FF79C2862A66F72200BBC60A /* TestConstants.swift in Sources */,
 				FF79C27F2A66F3A000BBC60A /* XCUIElement+Extensions.swift in Sources */,
