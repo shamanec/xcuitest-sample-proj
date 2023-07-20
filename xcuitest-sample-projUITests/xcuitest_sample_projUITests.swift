@@ -9,24 +9,12 @@ import XCTest
 
 final class xcuitest_sample_projUITests: Base {
     
-    let homePage = HomePage()
-    let displayPage = DisplayBrightness()
-
-    func testGentleSwipeExample() {
-        app.performGentleSwipe(.up, TestConstants.SwipeAdjustment.small)
-        app.performGentleSwipe(.up, TestConstants.SwipeAdjustment.medium)
-        app.performGentleSwipe(.up, TestConstants.SwipeAdjustment.normal)
-        app.performGentleSwipe(.up, TestConstants.SwipeAdjustment.big)
-        app.performGentleSwipe(.up, TestConstants.SwipeAdjustment.veryBig)
+    func testOMG() {
+        print(app.debugDescription)
+        InteractionHelper.performGentleSwipeUntil(app.scrollViews["DummyPage1Tab"], .left, 5, until: app.staticTexts["carousel_item10"].exists)
     }
     
-    func testChangeBrightness() {
-        homePage.openDisplayAndBrightness()
-        displayPage.setBrightnessMin()
-        sleep(2)
-        displayPage.setBrightnessMax()
-        sleep(2)
-        displayPage.setBrightnessHalf()
-        sleep(2)
-    }
+//    func testOMG2() {
+//        InteractionHelper.performSwipeUntil(app.scrollViews["DummyPage1Tab"], .left, 3, until: app.staticTexts["carousel_item10"].exists)
+//    }
 }
