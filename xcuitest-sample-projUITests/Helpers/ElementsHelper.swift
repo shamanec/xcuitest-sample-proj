@@ -16,17 +16,19 @@ class ElementsHelper: XCTest {
     ///   - elementsCount: Minimum number of elements to expect in the XCUIElementQuery
     /// - Returns: Boolean value if the condition was met and the query has at least the X number of elements
     class func waitUntilTableFilled(elements: XCUIElementQuery,
-                                    _ timeoutValue: Double,
-                                    _ elementsCount: Int = 1) -> Bool {
+                                    _ elementsCount: Int = 1,
+                                    _ timeoutValue: Double = TestConstants.Timeout.long) {
+        var result = false
         let startTime = Date().timeIntervalSince1970
         
         while (Date().timeIntervalSince1970 - startTime) < timeoutValue {
             if elements.count >= elementsCount {
-                return true
+                result = true
+                break
             }
             usleep(300_000) // 300ms
         }
-        return false
+        XCTAssertTrue(result, "XCUIElementQuery was not filled with \(elementsCount) elements in \(timeoutValue) seconds")
     }
     
     /// Performs drag and drop actions on non-hittable elements

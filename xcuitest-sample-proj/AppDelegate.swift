@@ -24,9 +24,9 @@ struct TabBarView: View {
                     Label("Carousel", systemImage: "star")
                 }
             
-            DummyPage2View()
+            LoadingElementsView()
                 .tabItem {
-                    Label("Dummy Page 2", systemImage: "star")
+                    Label("Loading", systemImage: "star")
                 }
             
             DisappearButtonView()
@@ -52,10 +52,28 @@ struct CarouselView: View {
     }
 }
 
-struct DummyPage2View: View {
+struct LoadingElementsView: View {
+    @State private var visibleElements = 1
+    private let totalElements = 5
+    private let interval = 2.0 // In seconds
+    
     var body: some View {
-        // Your content for the third dummy page
-        Text("Dummy Page 3")
+        List {
+            ForEach(0..<visibleElements, id: \.self) { index in
+                Text("Element \(index + 1)")
+                    .accessibilityIdentifier("loaded-el")
+            }
+        }
+        .onAppear {
+            // Start the timer when the view appears
+            Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+                if visibleElements < totalElements {
+                    visibleElements += 1
+                } else {
+                    timer.invalidate()
+                }
+            }
+        }
     }
 }
 
