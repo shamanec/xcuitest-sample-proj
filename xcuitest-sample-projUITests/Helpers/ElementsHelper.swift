@@ -35,9 +35,9 @@ class ElementsHelper: XCTest {
     ///   - firstElement: The element that will be dragged
     ///   - secondElement: The element which will be used as an end coordinate to drag the first element to
     ///   - pressDuration: How long to press the element to activate the drag and drop functionality before moving it
-    class func dragAndDropNonHittable(_ firstElement: XCUIElement, _ secondElement: XCUIElement, _ pressDuration: TimeInterval) {
-        let startCoordinate = firstElement.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-        let endCoordinate = secondElement.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+    class func dragAndDrop(_ firstElement: XCUIElement, _ secondElement: XCUIElement, _ pressDuration: TimeInterval) {
+        let startCoordinate = firstElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let endCoordinate = secondElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         startCoordinate.press(forDuration: pressDuration, thenDragTo: endCoordinate)
     }
     
@@ -68,19 +68,21 @@ class ElementsHelper: XCTest {
     ///   - relativePosition: The expected position of the first element relative to the second element
     class func validateElementToElementPosition(firstElement: XCUIElement,
                                                 secondElement: XCUIElement,
-                                                relativePosition: TestConstants.ElementPosition) -> Bool {
+                                                relativePosition: TestConstants.ElementPosition) {
+        var result = false
         switch relativePosition {
         case .leftOf:
-            return firstElement.frame.maxX <= secondElement.frame.minX
+            result = firstElement.frame.maxX <= secondElement.frame.minX
 
         case .rightOf:
-            return firstElement.frame.minX >= secondElement.frame.maxX
+            result = firstElement.frame.minX >= secondElement.frame.maxX
 
         case .above:
-            return firstElement.frame.maxY <= secondElement.frame.minY
+            result = firstElement.frame.maxY <= secondElement.frame.minY
 
         case .below:
-            return firstElement.frame.minY >= secondElement.frame.maxY
+            result = firstElement.frame.minY >= secondElement.frame.maxY
         }
+        XCTAssertTrue(result, "\(firstElement) is not in `\(relativePosition)` relative position to \(secondElement)")
     }
 }

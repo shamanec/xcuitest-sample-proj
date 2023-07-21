@@ -19,51 +19,71 @@ struct YourAppNameApp: App {
 struct TabBarView: View {
     var body: some View {
         TabView {
-            DummyPage1View()
+            CarouselView()
                 .tabItem {
-                    Label("Dummy Page 1", systemImage: "star")
+                    Label("Carousel", systemImage: "star")
                 }
-                .accessibilityIdentifier("DummyPage1Tab")
             
             DummyPage2View()
                 .tabItem {
-                    Label("Dummy Page 2", systemImage: "heart")
+                    Label("Dummy Page 2", systemImage: "star")
                 }
-                .accessibilityIdentifier("DummyPage2Tab")
             
-            DummyPage3View()
+            DisappearButtonView()
                 .tabItem {
-                    Label("Dummy Page 3", systemImage: "square")
+                    Label("Disappear", systemImage: "star")
                 }
-                .accessibilityIdentifier("DummyPage3Tab")
         }
     }
 }
 
-struct DummyPage1View: View {
+struct CarouselView: View {
     var body: some View {
-           ScrollView(.horizontal) {
-               LazyHStack(spacing: 16) {
-                   ForEach(1...10, id: \.self) { index in
-                       // Load each carousel item lazily
-                       CarouselItemView(item: index)
-                   }
-               }
-               .padding()
-           }
-       }
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 16) {
+                ForEach(1...10, id: \.self) { index in
+                    // Load each carousel item lazily
+                    CarouselItemView(item: index)
+                }
+            }
+            .padding()
+        }
+        .accessibilityIdentifier("carousel-view")
+    }
 }
 
 struct DummyPage2View: View {
     var body: some View {
-        // Your content for the second dummy page
-        Text("Dummy Page 2")
+        // Your content for the third dummy page
+        Text("Dummy Page 3")
     }
 }
 
-struct DummyPage3View: View {
+struct DisappearButtonView: View {
+    @State private var isButtonVisible = true
+    
     var body: some View {
-        // Your content for the third dummy page
-        Text("Dummy Page 3")
+        VStack {
+            if isButtonVisible {
+                Button("Disappearing button") {
+                    // Handle the action when the button is tapped
+                    hideButtonAfterDelay()
+                }
+                .foregroundColor(.white) // Text color
+                .padding()
+                .frame(width: 200, height: 50) // Set exact width and height
+                .background(Color.blue) // Button background color
+                .cornerRadius(12) // Rounded re
+                .accessibilityIdentifier("disappearing-button")
+            }
+        }
+        .padding()
+    }
+    
+    private func hideButtonAfterDelay() {
+        // Set the button visibility to false after 5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            isButtonVisible = false
+        }
     }
 }
