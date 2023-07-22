@@ -28,27 +28,50 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Loading", systemImage: "star")
                 }
-            
-            DisappearButtonView()
-                .tabItem {
-                    Label("Disappear", systemImage: "star")
-                }
         }
     }
 }
 
 struct CarouselView: View {
+    @State private var isButtonVisible = true
+    
     var body: some View {
-        ScrollView(.horizontal) {
-            LazyHStack(spacing: 16) {
-                ForEach(1...10, id: \.self) { index in
-                    // Load each carousel item lazily
-                    CarouselItemView(item: index)
+        VStack {
+            ScrollView(.horizontal) {
+                LazyHStack(spacing: 16) {
+                    ForEach(1...10, id: \.self) { index in
+                        // Load each carousel item lazily
+                        CarouselItemView(item: index)
+                    }
+                }
+                .padding()
+                .frame(height: 150)
+            }
+            .accessibilityIdentifier("carousel-view")
+            
+            VStack {
+                if isButtonVisible {
+                    Button("Disappearing button") {
+                        // Handle the action when the button is tapped
+                        hideButtonAfterDelay()
+                    }
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 200, height: 50)
+                    .background(Color.blue)
+                    .cornerRadius(12)
+                    .accessibilityIdentifier("disappearing-button")
                 }
             }
-            .padding()
         }
-        .accessibilityIdentifier("carousel-view")
+        
+    }
+    
+    private func hideButtonAfterDelay() {
+        // Set the button visibility to false after 5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            isButtonVisible = false
+        }
     }
 }
 
@@ -73,35 +96,6 @@ struct LoadingElementsView: View {
                     timer.invalidate()
                 }
             }
-        }
-    }
-}
-
-struct DisappearButtonView: View {
-    @State private var isButtonVisible = true
-    
-    var body: some View {
-        VStack {
-            if isButtonVisible {
-                Button("Disappearing button") {
-                    // Handle the action when the button is tapped
-                    hideButtonAfterDelay()
-                }
-                .foregroundColor(.white) // Text color
-                .padding()
-                .frame(width: 200, height: 50) // Set exact width and height
-                .background(Color.blue) // Button background color
-                .cornerRadius(12) // Rounded re
-                .accessibilityIdentifier("disappearing-button")
-            }
-        }
-        .padding()
-    }
-    
-    private func hideButtonAfterDelay() {
-        // Set the button visibility to false after 5 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            isButtonVisible = false
         }
     }
 }

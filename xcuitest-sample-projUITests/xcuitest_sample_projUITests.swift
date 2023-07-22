@@ -10,6 +10,7 @@ import XCTest
 final class xcuitest_sample_projUITests: Base {
     
     func testGentleSwipeUntil() {
+        print(app.debugDescription)
         InteractionHelper.performGentleSwipeUntil(app.scrollViews["carousel-view"], .left, 5, until: app.staticTexts["carousel_item10"].exists)
     }
     
@@ -30,14 +31,16 @@ final class xcuitest_sample_projUITests: Base {
     func testElementDisappearsSameScreen() {
         app.buttons["Disappear"].tap()
         let disappearingButton = app.buttons.element(matching: .button, identifier: "disappearing-button")
+        XCTAssertTrue(disappearingButton.isVisible)
         disappearingButton.tap()
         ElementsHelper.waitUntilElementDisappears(element: disappearingButton, timeoutValue: 6)
+        XCTAssertFalse(disappearingButton.isVisible)
     }
     
     func testElementNotExistChangeScreens() {
         app.buttons["Disappear"].tap()
         let button = app.buttons.element(matching: .button, identifier: "disappearing-button")
-        XCTAssertTrue(button.exists)
+        XCTAssertTrue(button.isVisible)
         app.buttons["Carousel"].tap()
         XCTAssertFalse(button.exists)
     }
@@ -45,10 +48,8 @@ final class xcuitest_sample_projUITests: Base {
     func testWaitForQueryHaveNumberOfElements() {
         app.buttons["Loading"].tap()
         let elements = app.staticTexts.matching(identifier: "loaded-el")
-        // Wait default timeout to have at least 1 element, should pass
-        ElementsHelper.waitUntilTableFilled(elements: elements)
-        // Wait for 10 seconds to have 5 elements, should pass
-        ElementsHelper.waitUntilTableFilled(elements: elements, 5, TestConstants.Timeout.medium)
+        // Wait for 11 seconds to have 5 elements, should pass
+        ElementsHelper.waitUntilTableFilled(elements: elements, 11, TestConstants.Timeout.medium)
         // Wait 5 more seconds to have 6 elements, should fail because only 5 in total will be loaded
         ElementsHelper.waitUntilTableFilled(elements: elements, 6, TestConstants.Timeout.short)
     }
