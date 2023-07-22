@@ -10,11 +10,16 @@ import XCTest
 class InteractionHelper {
 
     
-    /// Gentler swipe alternative to the integrated swipe
+    /// Gentler swipe alternative to the XCTest provided swipe
     ///
+    /// **Examples**
+    ///  ```
+    ///  - performGentleSwipe(app.scrollViews["test"], TestConstants.Direction.up, TestConstants.SwipeAdjustment.normal): This will perform a gentle swipe up in the targeted scrollview
+    ///  ```
     /// - Parameters:
-    ///   - direction: The direction of the swipe gesture, refer to TestConstants class for available options
-    ///   - swipeAdjustment: CGFloat value for the size of the swipe gesture, refer to TestConstants class for available options
+    ///   - element: XCUIElement as target for the gesture
+    ///   - direction: The direction of the swipe gesture, refer to `TestConstants` class for available options
+    ///   - swipeAdjustment: CGFloat value for the size of the swipe gesture, refer to `TestConstants` class for available options
     class func performGentleSwipe(_ element: XCUIElement, _ direction: TestConstants.Direction, _ swipeAdjustment: CGFloat = TestConstants.SwipeAdjustment.normal) {
         let startCoordinate = element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         let endCoordinate: XCUICoordinate
@@ -33,14 +38,34 @@ class InteractionHelper {
         startCoordinate.press(forDuration: 0.05, thenDragTo: endCoordinate)
     }
     
+    /// Perform multiple gentle swipes
+    ///
+    /// **Examples**
+    ///  ```
+    ///  - performGentleSwipes(app.scrollViews["test"], TestConstants.Direction.up, TestConstants.SwipeAdjustment.normal, 3): This will perform 3 gentle swipes in the targeted scrollview
+    ///  ```
+    /// - Parameters:
+    ///   - element: XCUIElement as target for the gesture
+    ///   - direction: The direction of the swipe gesture, refer to `TestConstants` class for available options
+    ///   - swipeAdjustment: CGFloat value for the size of the swipe gesture, refer to `TestConstants` class for available options
+    ///   - count: Number of gentle swipes to perform
+    class func performGentleSwipes(_ element: XCUIElement, _ direction: TestConstants.Direction, _ swipeAdjustment: CGFloat = TestConstants.SwipeAdjustment.normal, _ count: Int) {
+        for _ in 1...count {
+            performGentleSwipe(element, direction, swipeAdjustment)
+        }
+    }
+    
     ///  Swipe until a condition is met, allows to swipe in a specific element
     ///
+    ///  **Examples**
+    ///  ```
+    ///  - performGentleSwipeUntil(app.scrollViews["test"], TestConstants.Direction.up, 3, until: elementUnderTest.exists): This will swipe up in the app or element 3 times and check if another element exists each time
+    ///  ```
     /// - Parameters:
-    ///   - swipeDirection: The direction of the swipe gesture, refer to TestConstants class for available options
-    ///   - maxNumberOfSwipes: The number of swipes to perform before failing
-    ///   - swipeAdjustment: CGFloat value for the size of the swipe gesture, refer to TestConstants class for available options
-    ///   - until: Condition that needs to be met while swiping - element.exists for example
-    /// - Returns: Boolean value if the condition was met while swiping
+    ///   - swipeDirection: The direction of the swipe gesture, refer to `TestConstants` class for available options
+    ///   - maxNumberOfSwipes:  The number of swipes to perform before failing
+    ///   - swipeAdjustment: CGFloat value for the size of the swipe gesture, refer to `TestConstants` or provide your own
+    ///   - until: Condition that needs to be met while swiping - `element.exists` for example
     class func performGentleSwipeUntil(_ element: XCUIElement, _ swipeDirection: TestConstants.Direction, _ maxNumberOfSwipes: UInt, _ swipeAdjustment: CGFloat = TestConstants.SwipeAdjustment.normal, until condition: @autoclosure () -> Bool ) {
         var success = false
         for _ in 1...maxNumberOfSwipes {
@@ -49,7 +74,8 @@ class InteractionHelper {
                 break
             }
             performGentleSwipe(element, swipeDirection, swipeAdjustment)
-            // to avoid perform an extra scroll when the conditions fails since the previous scroll didn't end yet
+            
+            // to avoid performing an extra scroll when the conditions fails since the previous scroll didn't end yet
             sleep(1)
         }
         XCTAssertTrue(success, "Condition was not satisfied swiping \(maxNumberOfSwipes) times in \(self) with swipe adjustment \(swipeAdjustment)")
@@ -59,13 +85,12 @@ class InteractionHelper {
     ///
     /// **Examples:**
     /// ```
-    /// - swipeUntil(TestConstants.Direction.up, 3, until: elementUnderTest.exists): This will swipe up in the app or element 3 times and check if another element exists each time
+    /// - performSwipeUntil(TestConstants.Direction.up, 3, until: elementUnderTest.exists): This will swipe up in the app or element 3 times and check if another element exists each time
     /// ```
     /// - Parameters:
-    ///   - swipeDirection: The direction of the swipe gesture, refer to TestConstants class for available options
+    ///   - swipeDirection: The direction of the swipe gesture, refer to `TestConstants` class for available options
     ///   - maxNumberOfSwipes: The number of swipes to perform before failing
-    ///   - until: Condition that needs to be met while swiping - element.exists for example
-    /// - Returns: Boolean value if the element was found while swiping in the container
+    ///   - until: Condition that needs to be met while swiping - `element.exists` for example
     class func performSwipeUntil(_ element: XCUIElement, _ swipeDirection: TestConstants.Direction, _ maxNumberOfSwipes: UInt, until condition: @autoclosure () -> Bool) {
         var success = false
         for _ in 1...maxNumberOfSwipes {
@@ -84,7 +109,7 @@ class InteractionHelper {
                 element.swipeRight()
             }
             
-            // to avoid perform an extra scroll when the conditions fails since the previous scroll didn't end yet
+            // to avoid performing an extra scroll when the conditions fails since the previous scroll didn't end yet
             sleep(1)
         }
         XCTAssertTrue(success, "Condition was not satisfied swiping \(maxNumberOfSwipes) times in \(self)")

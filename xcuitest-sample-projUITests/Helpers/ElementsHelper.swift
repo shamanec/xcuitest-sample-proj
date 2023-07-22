@@ -17,7 +17,7 @@ class ElementsHelper: XCTest {
     /// - Returns: Boolean value if the condition was met and the query has at least the X number of elements
     class func waitUntilTableFilled(elements: XCUIElementQuery,
                                     _ elementsCount: Int = 1,
-                                    _ timeoutValue: Double = TestConstants.Timeout.long) {
+                                    _ timeoutValue: Double = TestConstants.Timeout.medium) {
         var result = false
         let startTime = Date().timeIntervalSince1970
         
