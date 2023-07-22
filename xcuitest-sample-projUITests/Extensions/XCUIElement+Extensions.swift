@@ -17,25 +17,11 @@ extension XCUIElement {
         coordinate.tap()
     }
     
-//    /**
-//     You can use this function to clear the typed text from a text field using the keyboard
-//     It will try to focus the field if not focused already, will not work on simulator without actual keyboard displayed during execution
-//     */
-//    func clearTextField() {
-//        let startTime = NSDate().timeIntervalSince1970
-//        let deleteButton = XCUIApplication().keys.matching(identifier: "delete").element(boundBy: 0)
-//        XCTAssertTrue(waitForExistence(timeout: 3.0))
-//        if !self.debugDescription.contains("Keyboard Focused") {
-//            tap()
-//        }
-//        while (NSDate().timeIntervalSince1970 - startTime) < 10 {
-//            if XCUIApplication().keyboards.count >= 1 && deleteButton.isHittable {
-//                break
-//            }
-//            usleep(300_000) // 300ms
-//        }
-//        doubleTap()
-//        deleteButton.tap()
-//        XCUIApplication().toolbars.buttons["Done"].tap()
-//    }
+    /// Indicates if the element is currently "visible" for interaction on the screen - it does not indicate if the element is fully visible or only partially
+    var isVisible: Bool {
+        // When accessing properties of XCUIElement, XCTest works differently than in a case of actions on elements
+        // - there is no waiting for the app to idle and to finish all animations.
+        // This can lead to problems and test flakiness as the test will evaluate a query before e.g. view transition has been completed.
+        return exists && isHittable
+    }
 }
