@@ -15,7 +15,7 @@ class ElementsHelper: XCTest {
     ///   - timeoutValue: How long to wait until the condition is met
     ///   - elementsCount: Minimum number of elements to expect in the XCUIElementQuery
     /// - Returns: Boolean value if the condition was met and the query has at least the X number of elements
-    class func waitUntilTableFilled(elements: XCUIElementQuery,
+    class func waitUntilTableFilled(_ elements: XCUIElementQuery,
                                     _ elementsCount: Int = 1,
                                     _ timeoutValue: Double = TestConstants.Timeout.medium) {
         var result = false
@@ -48,7 +48,7 @@ class ElementsHelper: XCTest {
     /// - Parameters:
     ///   - element: XCUIElement that will be polled until it disappears
     ///   - timeoutValue: How long to poll the XCUIElement until it disappears
-    class func waitUntilElementDisappears(element: XCUIElement, timeoutValue: Double) {
+    class func waitUntilElementDisappears(_ element: XCUIElement, _ timeoutValue: Double) {
         let startTime = Date().timeIntervalSince1970
         var elementVisible = true
         
@@ -68,9 +68,9 @@ class ElementsHelper: XCTest {
     ///   - firstElement: The element for which we validate the position
     ///   - secondElement: The element against which we validate the first element position
     ///   - relativePosition: The expected position of the first element relative to the second element
-    class func validateElementToElementPosition(firstElement: XCUIElement,
-                                                secondElement: XCUIElement,
-                                                relativePosition: TestConstants.ElementPosition) {
+    class func validateElementToElementPosition(_ firstElement: XCUIElement,
+                                                _ secondElement: XCUIElement,
+                                                _ relativePosition: TestConstants.ElementPosition) {
         var result = false
         switch relativePosition {
         case .leftOf:

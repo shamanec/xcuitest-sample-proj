@@ -16,6 +16,6 @@ struct CarouselItemView: View {
             .background(Color.blue)
             .foregroundColor(.white)
             .cornerRadius(10)
-            .accessibilityIdentifier("carousel_item\(item)")
+            .accessibilityIdentifier("carousel_item")
     }
 }

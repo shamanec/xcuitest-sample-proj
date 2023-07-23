@@ -7,13 +7,10 @@
 
 import XCTest
 
-class Base: XCTestCase {
+class BaseTest: XCTestCase {
     private let defaultLoadingTime = 30.0
     static var isReflectionIdleEnabled = false
-    
-    public let app = XCUIApplication()
-    // Below for the developed app target
-    // let app = XCUIApplication()
+    private let app = XCUIApplication()
     
     override func setUp() {
         // Fail-fast tests
@@ -24,6 +21,18 @@ class Base: XCTestCase {
     
     override func tearDown() {
         app.terminate()
+    }
+    
+    func getApp() -> XCUIApplication {
+        return self.app
+    }
+    
+    func getExternalApp(bundleIdentifier: String) -> XCUIApplication {
+        return XCUIApplication(bundleIdentifier: bundleIdentifier)
+    }
+    
+    func printPageSource() {
+        print(app.debugDescription)
     }
     
     public func waitForPageLoading(element: XCUIElement) {
@@ -41,10 +50,10 @@ class Base: XCTestCase {
             return
         }
         
-        if state != Base.isReflectionIdleEnabled {
+        if state != BaseTest.isReflectionIdleEnabled {
             method_exchangeImplementations(current, replaced)
             print("[UITest] reflection idle hack " + (state ? "set" : "unset"))
-            Base.isReflectionIdleEnabled = state
+            BaseTest.isReflectionIdleEnabled = state
         }
     }
     

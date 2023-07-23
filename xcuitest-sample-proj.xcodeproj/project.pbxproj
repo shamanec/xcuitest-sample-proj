@@ -14,11 +14,15 @@
 		FF79C2032A66F1B700BBC60A /* xcuitest_sample_projUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2022A66F1B700BBC60A /* xcuitest_sample_projUITests.swift */; };
 		FF79C27F2A66F3A000BBC60A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C27E2A66F3A000BBC60A /* XCUIElement+Extensions.swift */; };
 		FF79C2812A66F45200BBC60A /* XCUIElementQuery+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2802A66F45200BBC60A /* XCUIElementQuery+Extensions.swift */; };
-		FF79C2832A66F54E00BBC60A /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2822A66F54E00BBC60A /* Base.swift */; };
+		FF79C2832A66F54E00BBC60A /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2822A66F54E00BBC60A /* BaseTest.swift */; };
 		FF79C2862A66F72200BBC60A /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2852A66F72200BBC60A /* TestConstants.swift */; };
 		FF79C2892A66F9F500BBC60A /* InteractionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2882A66F9F500BBC60A /* InteractionHelper.swift */; };
 		FF86799B2A69699D00C4A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86799A2A69699D00C4A1A7 /* AppDelegate.swift */; };
 		FF86799E2A696BDC00C4A1A7 /* CarouselItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86799D2A696BDC00C4A1A7 /* CarouselItemView.swift */; };
+		FFF0348F2A6CFA6500A33E97 /* FirstPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF0348E2A6CFA6500A33E97 /* FirstPage.swift */; };
+		FFF034912A6CFA8B00A33E97 /* BasePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034902A6CFA8B00A33E97 /* BasePage.swift */; };
+		FFF034932A6CFEA200A33E97 /* SecondPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034922A6CFEA200A33E97 /* SecondPage.swift */; };
+		FFF034952A6D027B00A33E97 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034942A6D027B00A33E97 /* TabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,11 +53,15 @@
 		FF79C2022A66F1B700BBC60A /* xcuitest_sample_projUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xcuitest_sample_projUITests.swift; sourceTree = "<group>"; };
 		FF79C27E2A66F3A000BBC60A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		FF79C2802A66F45200BBC60A /* XCUIElementQuery+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElementQuery+Extensions.swift"; sourceTree = "<group>"; };
-		FF79C2822A66F54E00BBC60A /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
+		FF79C2822A66F54E00BBC60A /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 		FF79C2852A66F72200BBC60A /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
 		FF79C2882A66F9F500BBC60A /* InteractionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionHelper.swift; sourceTree = "<group>"; };
 		FF86799A2A69699D00C4A1A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF86799D2A696BDC00C4A1A7 /* CarouselItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselItemView.swift; sourceTree = "<group>"; };
+		FFF0348E2A6CFA6500A33E97 /* FirstPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstPage.swift; sourceTree = "<group>"; };
+		FFF034902A6CFA8B00A33E97 /* BasePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePage.swift; sourceTree = "<group>"; };
+		FFF034922A6CFEA200A33E97 /* SecondPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPage.swift; sourceTree = "<group>"; };
+		FFF034942A6D027B00A33E97 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,10 @@
 		FF4D5CAB2A67FDA300B52624 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				FFF0348E2A6CFA6500A33E97 /* FirstPage.swift */,
+				FFF034902A6CFA8B00A33E97 /* BasePage.swift */,
+				FFF034922A6CFEA200A33E97 /* SecondPage.swift */,
+				FFF034942A6D027B00A33E97 /* TabBar.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -134,7 +146,7 @@
 				FF79C2842A66F71100BBC60A /* Props */,
 				FF79C27D2A66F31800BBC60A /* Extensions */,
 				FF79C2022A66F1B700BBC60A /* xcuitest_sample_projUITests.swift */,
-				FF79C2822A66F54E00BBC60A /* Base.swift */,
+				FF79C2822A66F54E00BBC60A /* BaseTest.swift */,
 			);
 			path = "xcuitest-sample-projUITests";
 			sourceTree = "<group>";
@@ -320,14 +332,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF79C2832A66F54E00BBC60A /* Base.swift in Sources */,
+				FF79C2832A66F54E00BBC60A /* BaseTest.swift in Sources */,
+				FFF034932A6CFEA200A33E97 /* SecondPage.swift in Sources */,
 				FF79C2032A66F1B700BBC60A /* xcuitest_sample_projUITests.swift in Sources */,
+				FFF034952A6D027B00A33E97 /* TabBar.swift in Sources */,
 				FF79C2892A66F9F500BBC60A /* InteractionHelper.swift in Sources */,
 				FF4D5CB42A68146700B52624 /* Utils.swift in Sources */,
 				FF4D5CB02A68033C00B52624 /* ElementsHelper.swift in Sources */,
+				FFF0348F2A6CFA6500A33E97 /* FirstPage.swift in Sources */,
 				FF79C2862A66F72200BBC60A /* TestConstants.swift in Sources */,
 				FF79C27F2A66F3A000BBC60A /* XCUIElement+Extensions.swift in Sources */,
 				FF79C2812A66F45200BBC60A /* XCUIElementQuery+Extensions.swift in Sources */,
+				FFF034912A6CFA8B00A33E97 /* BasePage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

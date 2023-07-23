@@ -8,9 +8,6 @@
 import XCTest
 
 class InteractionHelper {
-
-    private static let app = XCUIApplication()
-    
     /// Gentler swipe alternative allowing swipe in specified XCUIElement
     ///
     /// **Examples**
@@ -50,7 +47,7 @@ class InteractionHelper {
     ///   - direction: The direction of the swipe gesture, refer to `TestConstants` class for available options
     ///   - swipeAdjustment: CGFloat value for the size of the swipe gesture, refer to `TestConstants` class for available options
     static func performGentleSwipe(_ direction: TestConstants.Direction, _ swipeAdjustment: CGFloat = TestConstants.SwipeAdjustment.normal) {
-        performGentleSwipe(app, direction, swipeAdjustment)
+        performGentleSwipe(BaseTest().getApp(), direction, swipeAdjustment)
     }
     
     /// Perform multiple gentle swipes
