@@ -34,6 +34,7 @@ struct TabBarView: View {
 
 struct CarouselView: View {
     @State private var isButtonVisible = true
+    @State private var text: String = ""
     
     var body: some View {
         VStack {
@@ -63,6 +64,12 @@ struct CarouselView: View {
                     .accessibilityIdentifier("disappearing-button")
                 }
             }
+            
+            TextFieldWrapper(text: $text)
+                .padding()
+                .frame(width: 200, height: 50)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .accessibilityIdentifier("text-field")
         }
         
     }

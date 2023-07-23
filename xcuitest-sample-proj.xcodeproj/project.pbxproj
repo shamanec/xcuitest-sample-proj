@@ -22,6 +22,8 @@
 		FFF034912A6CFA8B00A33E97 /* BasePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034902A6CFA8B00A33E97 /* BasePage.swift */; };
 		FFF034932A6CFEA200A33E97 /* SecondPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034922A6CFEA200A33E97 /* SecondPage.swift */; };
 		FFF034952A6D027B00A33E97 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034942A6D027B00A33E97 /* TabBar.swift */; };
+		FFF034992A6D219000A33E97 /* TextFieldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034982A6D219000A33E97 /* TextFieldWrapper.swift */; };
+		FFF0349B2A6D227100A33E97 /* XCUIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF0349A2A6D227100A33E97 /* XCUIApplication+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		FFF034902A6CFA8B00A33E97 /* BasePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePage.swift; sourceTree = "<group>"; };
 		FFF034922A6CFEA200A33E97 /* SecondPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPage.swift; sourceTree = "<group>"; };
 		FFF034942A6D027B00A33E97 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		FFF034982A6D219000A33E97 /* TextFieldWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWrapper.swift; sourceTree = "<group>"; };
+		FFF0349A2A6D227100A33E97 /* XCUIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,7 @@
 			children = (
 				FF79C27E2A66F3A000BBC60A /* XCUIElement+Extensions.swift */,
 				FF79C2802A66F45200BBC60A /* XCUIElementQuery+Extensions.swift */,
+				FFF0349A2A6D227100A33E97 /* XCUIApplication+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				FF86799D2A696BDC00C4A1A7 /* CarouselItemView.swift */,
+				FFF034982A6D219000A33E97 /* TextFieldWrapper.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFF034992A6D219000A33E97 /* TextFieldWrapper.swift in Sources */,
 				FF86799B2A69699D00C4A1A7 /* AppDelegate.swift in Sources */,
 				FF86799E2A696BDC00C4A1A7 /* CarouselItemView.swift in Sources */,
 			);
@@ -343,6 +350,7 @@
 				FFF034952A6D027B00A33E97 /* TabBar.swift in Sources */,
 				FF79C2892A66F9F500BBC60A /* InteractionHelper.swift in Sources */,
 				FF4D5CB02A68033C00B52624 /* ElementsHelper.swift in Sources */,
+				FFF0349B2A6D227100A33E97 /* XCUIApplication+Extensions.swift in Sources */,
 				FFF0348F2A6CFA6500A33E97 /* FirstPage.swift in Sources */,
 				FF79C2862A66F72200BBC60A /* TestConstants.swift in Sources */,
 				FF79C27F2A66F3A000BBC60A /* XCUIElement+Extensions.swift in Sources */,

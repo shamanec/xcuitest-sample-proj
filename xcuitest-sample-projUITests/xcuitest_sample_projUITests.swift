@@ -57,4 +57,12 @@ final class xcuitest_sample_projUITests: BaseTest {
         // Wait 5 more seconds to have 6 elements, should fail because only 5 in total will be loaded
         ElementsHelper.waitUntilTableFilled(elements, 6, TestConstants.Timeout.short)
     }
+    
+    func testTypeText() {
+        let textToType = "typed-text"
+        firstPage.textField.tap()
+        firstPage.textField.typeText(textToType)
+        let typedText = firstPage.textField.textFromValue
+        XCTAssertEqual(textToType, typedText)
+    }
 }

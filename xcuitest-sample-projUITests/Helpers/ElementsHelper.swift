@@ -87,4 +87,8 @@ class ElementsHelper: XCTest {
         }
         XCTAssertTrue(result, "\(firstElement) is not in `\(relativePosition)` relative position to \(secondElement)")
     }
+    
+    class func waitForElement(_ element: XCUIElement, _ timeoutValue: Double) -> Bool {
+        return element.waitForExistence(timeout: timeoutValue)
+    }
 }

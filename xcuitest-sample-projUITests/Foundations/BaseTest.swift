@@ -11,6 +11,7 @@ class BaseTest: XCTestCase {
     private let defaultLoadingTime = 30.0
     static var isReflectionIdleEnabled = false
     private let app = XCUIApplication()
+    private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
     
     override func setUp() {
         // Fail-fast tests
