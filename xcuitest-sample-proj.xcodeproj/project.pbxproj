@@ -24,6 +24,9 @@
 		FFF034952A6D027B00A33E97 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034942A6D027B00A33E97 /* TabBar.swift */; };
 		FFF034992A6D219000A33E97 /* TextFieldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034982A6D219000A33E97 /* TextFieldWrapper.swift */; };
 		FFF0349B2A6D227100A33E97 /* XCUIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF0349A2A6D227100A33E97 /* XCUIApplication+Extensions.swift */; };
+		FFF0349D2A6D4F6C00A33E97 /* CameraPermissionsRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF0349C2A6D4F6C00A33E97 /* CameraPermissionsRequestView.swift */; };
+		FFF034A12A6D56DF00A33E97 /* ThirdPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034A02A6D56DF00A33E97 /* ThirdPage.swift */; };
+		FFF034A32A6D687400A33E97 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FFF034A22A6D687400A33E97 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,9 @@
 		FFF034942A6D027B00A33E97 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		FFF034982A6D219000A33E97 /* TextFieldWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWrapper.swift; sourceTree = "<group>"; };
 		FFF0349A2A6D227100A33E97 /* XCUIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		FFF0349C2A6D4F6C00A33E97 /* CameraPermissionsRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionsRequestView.swift; sourceTree = "<group>"; };
+		FFF034A02A6D56DF00A33E97 /* ThirdPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPage.swift; sourceTree = "<group>"; };
+		FFF034A22A6D687400A33E97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 				FFF0348E2A6CFA6500A33E97 /* FirstPage.swift */,
 				FFF034922A6CFEA200A33E97 /* SecondPage.swift */,
 				FFF034942A6D027B00A33E97 /* TabBar.swift */,
+				FFF034A02A6D56DF00A33E97 /* ThirdPage.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -148,6 +155,7 @@
 				FF79C2842A66F71100BBC60A /* Props */,
 				FF79C27D2A66F31800BBC60A /* Extensions */,
 				FF79C2022A66F1B700BBC60A /* xcuitest_sample_projUITests.swift */,
+				FFF034A22A6D687400A33E97 /* README.md */,
 			);
 			path = "xcuitest-sample-projUITests";
 			sourceTree = "<group>";
@@ -184,6 +192,7 @@
 			children = (
 				FF86799D2A696BDC00C4A1A7 /* CarouselItemView.swift */,
 				FFF034982A6D219000A33E97 /* TextFieldWrapper.swift */,
+				FFF0349C2A6D4F6C00A33E97 /* CameraPermissionsRequestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,6 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFF034A32A6D687400A33E97 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +339,7 @@
 			files = (
 				FFF034992A6D219000A33E97 /* TextFieldWrapper.swift in Sources */,
 				FF86799B2A69699D00C4A1A7 /* AppDelegate.swift in Sources */,
+				FFF0349D2A6D4F6C00A33E97 /* CameraPermissionsRequestView.swift in Sources */,
 				FF86799E2A696BDC00C4A1A7 /* CarouselItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +365,7 @@
 				FFF0348F2A6CFA6500A33E97 /* FirstPage.swift in Sources */,
 				FF79C2862A66F72200BBC60A /* TestConstants.swift in Sources */,
 				FF79C27F2A66F3A000BBC60A /* XCUIElement+Extensions.swift in Sources */,
+				FFF034A12A6D56DF00A33E97 /* ThirdPage.swift in Sources */,
 				FF79C2812A66F45200BBC60A /* XCUIElementQuery+Extensions.swift in Sources */,
 				FFF034912A6CFA8B00A33E97 /* BasePage.swift in Sources */,
 			);
@@ -500,6 +512,8 @@
 				DEVELOPMENT_TEAM = Z7FLMTR679;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SampleApp;
+				INFOPLIST_KEY_NSCameraUsageDescription = "App requires camera access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -529,6 +543,8 @@
 				DEVELOPMENT_TEAM = Z7FLMTR679;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SampleApp;
+				INFOPLIST_KEY_NSCameraUsageDescription = "App requires camera access";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

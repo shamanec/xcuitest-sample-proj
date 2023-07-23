@@ -11,6 +11,7 @@ class TabBar: BasePage {
     private var defaultTabBar: XCUIElement { app }
     private var firstPageButton: XCUIElement { defaultTabBar.buttons["Carousel"] }
     private var secondPageButton: XCUIElement { defaultTabBar.buttons["Loading"] }
+    private var thirdPageButton: XCUIElement { defaultTabBar.buttons["Permissions"] }
     
     func openFirstPage() {
         firstPageButton.tap()
@@ -18,5 +19,9 @@ class TabBar: BasePage {
     
     func openSecondPage() {
         secondPageButton.tap()
+    }
+    
+    func openThirdPage() {
+        thirdPageButton.tap()
     }
 }

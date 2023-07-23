@@ -10,7 +10,8 @@ import XCTest
 final class xcuitest_sample_projUITests: BaseTest {
     let firstPage = FirstPage()
     let secondPage = SecondPage()
-    let tabBar = TabBar()
+    let thirdPage = ThirdPage()
+    let navigation = TabBar()
     
     func testGentleSwipeUntil() {
         printPageSource()
@@ -45,12 +46,12 @@ final class xcuitest_sample_projUITests: BaseTest {
     
     func testElementNotExistChangeScreens() {
         XCTAssertTrue(firstPage.disappearingButton.isVisible)
-        tabBar.openSecondPage()
+        navigation.openSecondPage()
         XCTAssertFalse(firstPage.disappearingButton.exists)
     }
     
     func testWaitForQueryHaveNumberOfElements() {
-        tabBar.openSecondPage()
+        navigation.openSecondPage()
         let elements = secondPage.loadingElements
         // Wait for 10 seconds to have 5 elements, should pass
         ElementsHelper.waitUntilTableFilled(elements, 5, TestConstants.Timeout.medium)
@@ -64,5 +65,22 @@ final class xcuitest_sample_projUITests: BaseTest {
         firstPage.textField.typeText(textToType)
         let typedText = firstPage.textField.textFromValue
         XCTAssertEqual(textToType, typedText)
+    }
+    
+    func testAllowCameraPermissions() {
+        handleCameraAlert(allow: true)
+        navigation.openThirdPage()
+        printPageSource()
+        XCTAssertTrue(getSpringboardApp().alerts.count == 0)
+        let state = thirdPage.getPermissionState()
+        XCTAssertEqual(state, "Allowed")
+    }
+    
+    func testDenyCameraPermissions() {
+        handleCameraAlert(allow: false)
+        navigation.openThirdPage()
+        XCTAssertTrue(getSpringboardApp().alerts.count == 0)
+        let state = thirdPage.getPermissionState()
+        XCTAssertEqual(state, "Denied")
     }
 }

@@ -23,10 +23,13 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Carousel", systemImage: "star")
                 }
-            
             LoadingElementsView()
                 .tabItem {
                     Label("Loading", systemImage: "star")
+                }
+            CameraPermissionsRequestView()
+                .tabItem {
+                    Label("Permissions", systemImage: "camera")
                 }
         }
     }
