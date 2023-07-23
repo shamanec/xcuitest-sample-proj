@@ -15,7 +15,7 @@ class ElementsHelper: XCTest {
     ///   - timeoutValue: How long to wait until the condition is met
     ///   - elementsCount: Minimum number of elements to expect in the XCUIElementQuery
     /// - Returns: Boolean value if the condition was met and the query has at least the X number of elements
-    class func waitUntilTableFilled(_ elements: XCUIElementQuery,
+    static func waitUntilTableFilled(_ elements: XCUIElementQuery,
                                     _ elementsCount: Int = 1,
                                     _ timeoutValue: Double = TestConstants.Timeout.medium) {
         var result = false
@@ -37,7 +37,7 @@ class ElementsHelper: XCTest {
     ///   - firstElement: The element that will be dragged
     ///   - secondElement: The element which will be used as an end coordinate to drag the first element to
     ///   - pressDuration: How long to press the element to activate the drag and drop functionality before moving it
-    class func dragAndDrop(_ firstElement: XCUIElement, _ secondElement: XCUIElement, _ pressDuration: TimeInterval) {
+    static func dragAndDrop(_ firstElement: XCUIElement, _ secondElement: XCUIElement, _ pressDuration: TimeInterval) {
         let startCoordinate = firstElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         let endCoordinate = secondElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         startCoordinate.press(forDuration: pressDuration, thenDragTo: endCoordinate)
@@ -48,7 +48,7 @@ class ElementsHelper: XCTest {
     /// - Parameters:
     ///   - element: XCUIElement that will be polled until it disappears
     ///   - timeoutValue: How long to poll the XCUIElement until it disappears
-    class func waitUntilElementDisappears(_ element: XCUIElement, _ timeoutValue: Double) {
+    static func waitUntilElementDisappears(_ element: XCUIElement, _ timeoutValue: Double) {
         let startTime = Date().timeIntervalSince1970
         var elementVisible = true
         
@@ -68,7 +68,7 @@ class ElementsHelper: XCTest {
     ///   - firstElement: The element for which we validate the position
     ///   - secondElement: The element against which we validate the first element position
     ///   - relativePosition: The expected position of the first element relative to the second element
-    class func validateElementToElementPosition(_ firstElement: XCUIElement,
+    static func validateElementToElementPosition(_ firstElement: XCUIElement,
                                                 _ secondElement: XCUIElement,
                                                 _ relativePosition: TestConstants.ElementPosition) {
         var result = false

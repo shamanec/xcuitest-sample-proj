@@ -91,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				FFF0348E2A6CFA6500A33E97 /* FirstPage.swift */,
-				FFF034902A6CFA8B00A33E97 /* BasePage.swift */,
 				FFF034922A6CFEA200A33E97 /* SecondPage.swift */,
 				FFF034942A6D027B00A33E97 /* TabBar.swift */,
 			);
@@ -139,12 +138,12 @@
 		FF79C2012A66F1B700BBC60A /* xcuitest-sample-projUITests */ = {
 			isa = PBXGroup;
 			children = (
+				FFF034972A6D1B3900A33E97 /* Foundations */,
 				FF4D5CAB2A67FDA300B52624 /* Pages */,
 				FF79C2872A66F9E500BBC60A /* Helpers */,
 				FF79C2842A66F71100BBC60A /* Props */,
 				FF79C27D2A66F31800BBC60A /* Extensions */,
 				FF79C2022A66F1B700BBC60A /* xcuitest_sample_projUITests.swift */,
-				FF79C2822A66F54E00BBC60A /* BaseTest.swift */,
 			);
 			path = "xcuitest-sample-projUITests";
 			sourceTree = "<group>";
@@ -181,6 +180,15 @@
 				FF86799D2A696BDC00C4A1A7 /* CarouselItemView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FFF034972A6D1B3900A33E97 /* Foundations */ = {
+			isa = PBXGroup;
+			children = (
+				FF79C2822A66F54E00BBC60A /* BaseTest.swift */,
+				FFF034902A6CFA8B00A33E97 /* BasePage.swift */,
+			);
+			path = Foundations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
