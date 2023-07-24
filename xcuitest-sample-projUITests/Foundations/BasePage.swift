@@ -15,10 +15,7 @@ class BasePage {
         self.app = app
     }
     
-    func waitForPageLoading(element: XCUIElement) {
-        XCTAssertTrue(element.waitForExistence(timeout: TestConstants.Timeout.medium))
-    }
-    
+    // MARK: - Reflection idle hack code
     // Function to turn on/off the hack that disables waitForQuiescenceIncludingAnimationsIdle - the method that forces the test to wait until the app is idle - by replacing it with the [replace()](x-source-tag://replace) method
     /// - Parameter state: Bool parameter to activate/deactivate the app idle wait logic
     private func setReflectionIdleHack(_ state: Bool) {
@@ -48,5 +45,44 @@ class BasePage {
         self.setReflectionIdleHack(true)
         block()
         self.setReflectionIdleHack(false)
+    }
+    
+    // MARK: Utility methods
+    func keyboardVisible() -> Bool {
+        let startTime = NSDate().timeIntervalSince1970
+        while (NSDate().timeIntervalSince1970 - startTime) < TestConstants.Timeout.medium {
+            if app.keyboards.count >= 1 {
+                return true
+            }
+            usleep(100_000)
+        }
+
+        return false
+    }
+    
+    func hideKeyboard() {
+        // Delay to avoid instability due to keyboard open animation
+        sleep(1)
+        if keyboardVisible() {
+            app.toolbars.buttons["Done"].tap()
+        }
+    }
+    
+    func tapDelete() {
+        app.keys["Delete"].tap()
+    }
+
+    func tapDelete(times: Int) {
+        for _ in 0...times {
+            tapDelete()
+        }
+    }
+
+    func tapOK() {
+        app.buttons["OK"].tap()
+    }
+    
+    func tabCancel() {
+        app.buttons["Cancel"].tap()
     }
 }

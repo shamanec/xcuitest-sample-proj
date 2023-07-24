@@ -7,7 +7,19 @@
 
 import XCTest
 
-class InteractionHelper {
+class Interactions {
+    /// Performs drag and drop actions on non-hittable elements
+    ///
+    /// - Parameters:
+    ///   - firstElement: The element that will be dragged
+    ///   - secondElement: The element which will be used as an end coordinate to drag the first element to
+    ///   - pressDuration: How long to press the element to activate the drag and drop functionality before moving it
+    static func dragAndDrop(_ firstElement: XCUIElement, _ secondElement: XCUIElement, _ pressDuration: TimeInterval) {
+        let startCoordinate = firstElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let endCoordinate = secondElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        startCoordinate.press(forDuration: pressDuration, thenDragTo: endCoordinate)
+    }
+    
     /// Gentler swipe alternative allowing swipe in specified XCUIElement
     ///
     /// **Examples**

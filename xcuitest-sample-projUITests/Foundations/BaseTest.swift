@@ -86,7 +86,7 @@ class BaseTest: XCTestCase {
         
         let settingsIcon = springboard.icons["Settings"]
         
-        if ElementsHelper.waitForElement(settingsIcon, 2) {
+        if Elements.waitForElement(settingsIcon, 2) {
             // Sleep for half a second after finding the settings button because sometimes it swipes before finishing transition to initial springboard screen
             usleep(500_000) // 0.5 seconds
             springboard.swipeLeft()
@@ -94,14 +94,14 @@ class BaseTest: XCTestCase {
        
         let appName = "SampleApp"
         let icon = springboard.icons[appName]
-        let iconExists = ElementsHelper.waitForElement(icon, TestConstants.Timeout.short)
+        let iconExists = Elements.waitForElement(icon, TestConstants.Timeout.short)
         
         guard iconExists else { return }
 
         icon.press(forDuration: TestConstants.Timeout.short)
         
         let editHomeScreenAlert = springboard.alerts["Edit Home Screens"]
-        if ElementsHelper.waitForElement(editHomeScreenAlert, 1) {
+        if Elements.waitForElement(editHomeScreenAlert, 1) {
             let editHomeScreenAlertButton = editHomeScreenAlert.buttons["OK"]
             editHomeScreenAlertButton.tap()
         }
@@ -128,5 +128,13 @@ class BaseTest: XCTestCase {
             print("[UITest] invalid regex: \(error.localizedDescription)")
             return nil
         }
+    }
+    
+    func waitForElementHittableAttributeToBe(_ element: XCUIElement, _ timeoutValue: Double, _ visibility: Bool) {
+        let predicate = "hittable == \(String(visibility))"
+        let isDisplayedPredicate = NSPredicate(format: predicate)
+        let expectation = [XCTNSPredicateExpectation(predicate: isDisplayedPredicate, object: element)]
+        let result = XCTWaiter().wait(for: expectation, timeout: timeoutValue)
+        XCTAssertEqual(result, .completed, "Element \(element) is not displayed and/or hittable")
     }
 }

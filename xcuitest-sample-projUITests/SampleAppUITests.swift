@@ -10,24 +10,24 @@ import XCTest
 final class SampleAppUITests: BaseTest {
     func testGentleSwipeUntil() {
         let firstPage = FirstPage(app: getApp())
-        InteractionHelper.performGentleSwipeUntil(firstPage.carousel, .left, 5, until: firstPage.carouselItems.element(matching: NSPredicate(format: "label CONTAINS[c] 'Item 10'")).exists)
+        Interactions.performGentleSwipeUntil(firstPage.carousel, .left, 5, until: firstPage.carouselItems.element(matching: NSPredicate(format: "label CONTAINS[c] 'Item 10'")).exists)
     }
     
     func testGenericSwipeUntil() {
         let firstPage = FirstPage(app: getApp())
-        InteractionHelper.performSwipeUntil(firstPage.carousel, .left, 3, until: firstPage.carouselItems["Item 10"].exists)
+        Interactions.performSwipeUntil(firstPage.carousel, .left, 3, until: firstPage.carouselItems["Item 10"].exists)
     }
     
     func testElementToElementPositionPass() {
         let firstPage = FirstPage(app: getApp())
         // This should pass
-        ElementsHelper.validateElementToElementPosition(firstPage.carouselItems["Item 2"], firstPage.carouselItems["Item 3"], .leftOf)
+        Elements.validateElementToElementPosition(firstPage.carouselItems["Item 2"], firstPage.carouselItems["Item 3"], .leftOf)
     }
     
     func testElementToElementPositionFail() {
         let firstPage = FirstPage(app: getApp())
         // This should fail
-        ElementsHelper.validateElementToElementPosition(firstPage.carouselItems["Item 2"], firstPage.carouselItems["Item 3"], .rightOf)
+        Elements.validateElementToElementPosition(firstPage.carouselItems["Item 2"], firstPage.carouselItems["Item 3"], .rightOf)
     }
     
     func testGetLastMatchFromQuery() {
@@ -40,7 +40,7 @@ final class SampleAppUITests: BaseTest {
         let firstPage = FirstPage(app: getApp())
         XCTAssertTrue(firstPage.disappearingButton.isVisible)
         firstPage.disappearingButton.tap()
-        ElementsHelper.waitUntilElementDisappears(firstPage.disappearingButton, 6)
+        Elements.waitUntilElementDisappears(firstPage.disappearingButton, 6)
         XCTAssertFalse(firstPage.disappearingButton.isVisible)
     }
     
@@ -58,9 +58,9 @@ final class SampleAppUITests: BaseTest {
         let secondPage = SecondPage(app: getApp())
         let elements = secondPage.loadingElements
         // Wait for 10 seconds to have 5 elements, should pass
-        ElementsHelper.waitUntilTableFilled(elements, 5, TestConstants.Timeout.medium)
+        Elements.waitUntilTableFilled(elements, 5, TestConstants.Timeout.medium)
         // Wait 5 more seconds to have 6 elements, should fail because only 5 in total will be loaded
-        ElementsHelper.waitUntilTableFilled(elements, 6, TestConstants.Timeout.short)
+        Elements.waitUntilTableFilled(elements, 6, TestConstants.Timeout.short)
     }
     
     func testTypeText() {
