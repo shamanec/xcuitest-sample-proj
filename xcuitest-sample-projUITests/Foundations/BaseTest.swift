@@ -9,7 +9,6 @@ import XCTest
 
 class BaseTest: XCTestCase {
     private let app = XCUIApplication()
-
     private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
     private let device = XCUIDevice.shared
     
@@ -27,6 +26,7 @@ class BaseTest: XCTestCase {
         // Fail-fast tests
         continueAfterFailure = false
         // Start the AUT
+        app.launchArguments = launchArguments()
         app.launch()
     }
     
@@ -36,6 +36,11 @@ class BaseTest: XCTestCase {
         screenshotAttachment.lifetime = .deleteOnSuccess
         add(screenshotAttachment)
         app.terminate()
+    }
+    
+    func launchArguments() -> [String] {
+        // Override this method in subclasses to provide custom launch arguments
+        return []
     }
     
     func getApp() -> XCUIApplication {
@@ -54,8 +59,7 @@ class BaseTest: XCTestCase {
         print(app.debugDescription)
     }
     
-    ///===========================
-    
+    /// Accept or deny camera permissions
     func handleCameraAlert(allow: Bool) {
         // Add UI interruption monitor to handle system alerts
         addUIInterruptionMonitor(withDescription: "System Alert") { (alert) -> Bool in
@@ -79,7 +83,7 @@ class BaseTest: XCTestCase {
         device.press(.home)
     }
     
-    /// This function allows to delete the app between tests
+    /// This function allows to delete the app between tests - to trigger permission alerts again for example
     func deleteApp() {
         app.terminate()
         pressHomeButton()
@@ -91,13 +95,13 @@ class BaseTest: XCTestCase {
             usleep(500_000) // 0.5 seconds
             springboard.swipeLeft()
         }
-       
+        
         let appName = "SampleApp"
         let icon = springboard.icons[appName]
         let iconExists = Elements.waitForElement(icon, TestConstants.Timeout.short)
         
         guard iconExists else { return }
-
+        
         icon.press(forDuration: TestConstants.Timeout.short)
         
         let editHomeScreenAlert = springboard.alerts["Edit Home Screens"]
@@ -105,7 +109,7 @@ class BaseTest: XCTestCase {
             let editHomeScreenAlertButton = editHomeScreenAlert.buttons["OK"]
             editHomeScreenAlertButton.tap()
         }
-
+        
         let deleteAppButton = springboard.icons[appName].buttons["DeleteButton"]
         deleteAppButton.tap()
         
@@ -117,24 +121,19 @@ class BaseTest: XCTestCase {
         pressHomeButton()
     }
     
+    ///
     private var cleanedTestName: String? {
         let testName = self.name
         do {
+            // The pattern (?<= )(.*?)(?=]) is a positive lookbehind (?<= ), followed by a non-greedy capture group (.*?), and finally, a positive lookahead (?=]).
+            // This regular expression is designed to match the text between a space and a closing square bracket ("]")
             let regex = try NSRegularExpression(pattern: "(?<= )(.*?)(?=])")
             guard let match = regex.firstMatch(in: testName, range: NSRange(testName.startIndex..., in: testName)),
-                let range = Range(match.range(at: 1), in: testName) else { return nil }
+                  let range = Range(match.range(at: 1), in: testName) else { return nil }
             return String(testName[range])
         } catch let error as NSError {
             print("[UITest] invalid regex: \(error.localizedDescription)")
             return nil
         }
-    }
-    
-    func waitForElementHittableAttributeToBe(_ element: XCUIElement, _ timeoutValue: Double, _ visibility: Bool) {
-        let predicate = "hittable == \(String(visibility))"
-        let isDisplayedPredicate = NSPredicate(format: predicate)
-        let expectation = [XCTNSPredicateExpectation(predicate: isDisplayedPredicate, object: element)]
-        let result = XCTWaiter().wait(for: expectation, timeout: timeoutValue)
-        XCTAssertEqual(result, .completed, "Element \(element) is not displayed and/or hittable")
     }
 }

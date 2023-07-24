@@ -13,4 +13,5 @@ class FirstPage: BasePage {
     var carouselItems: XCUIElementQuery { carousel.staticTexts }
     var disappearingButton: XCUIElement { app.buttons["disappearing-button"] }
     var textField: XCUIElement { app.textFields["text-field"] }
+    var argumentText: XCUIElement { app.staticTexts["argument-text"] }
 }

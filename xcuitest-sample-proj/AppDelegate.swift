@@ -36,6 +36,7 @@ struct TabBarView: View {
 }
 
 struct CarouselView: View {
+    @StateObject var viewModel = ArgumentTextViewModel()
     @State private var isButtonVisible = true
     @State private var text: String = ""
     
@@ -73,8 +74,19 @@ struct CarouselView: View {
                 .frame(width: 200, height: 50)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .accessibilityIdentifier("text-field")
+            
+            Text("Argument:\(viewModel.displayText)")
+                .foregroundColor(.gray)
+                .padding(.top, 8)
+                .accessibilityIdentifier("argument-text")
+                .onAppear {
+                    // Check if the launch arguments contain the specific argument you provided
+                    if CommandLine.arguments.contains("-showCustomText") {
+                        // Perform any action based on the launch argument, e.g., update ViewModel
+                        viewModel.displayText = "Custom"
+                    }
+                }
         }
-        
     }
     
     private func hideButtonAfterDelay() {
@@ -108,4 +120,9 @@ struct LoadingElementsView: View {
             }
         }
     }
+}
+
+// Your ViewModel
+class ArgumentTextViewModel: ObservableObject {
+    @Published var displayText: String = "Default"
 }

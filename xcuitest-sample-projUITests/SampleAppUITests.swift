@@ -79,8 +79,7 @@ final class SampleAppUITests: BaseTest {
         navigation.openThirdPage()
         XCTAssertTrue(getSpringboardApp().alerts.count == 0)
         let thirdPage = ThirdPage(app: getApp())
-        let state = thirdPage.getPermissionState()
-        XCTAssertEqual(state, "Allowed")
+        XCTAssertEqual(thirdPage.getPermissionState(), "Allowed")
     }
     
     func testDenyCameraPermissions() {
@@ -89,7 +88,11 @@ final class SampleAppUITests: BaseTest {
         navigation.openThirdPage()
         XCTAssertTrue(getSpringboardApp().alerts.count == 0)
         let thirdPage = ThirdPage(app: getApp())
-        let state = thirdPage.getPermissionState()
-        XCTAssertEqual(state, "Denied")
+        XCTAssertEqual(thirdPage.getPermissionState(), "Denied")
+    }
+    
+    func testLaunchArgumentNotProvided() {
+        let firstPage = FirstPage(app: getApp())
+        XCTAssertEqual(firstPage.argumentText.label, "Argument:Default")
     }
 }

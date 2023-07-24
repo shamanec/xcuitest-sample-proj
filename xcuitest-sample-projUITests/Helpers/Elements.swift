@@ -34,11 +34,12 @@ class Elements {
         XCTAssertTrue(result, "\(firstElement) is not in `\(relativePosition)` relative position to \(secondElement)")
     }
     
+    // MARK: - Wait functions
+    
+    /// Wait for element to exist
     static func waitForElement(_ element: XCUIElement, _ timeoutValue: Double) -> Bool {
         return element.waitForExistence(timeout: timeoutValue)
     }
-    
-    // MARK: - Wait functions
     
     /// Wait until XCUIElement disappears
     ///

@@ -62,10 +62,74 @@
             filePath = "xcuitest-sample-projUITests/Foundations/BaseTest.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "handleCameraAlert(allow:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B4B5838-F991-466B-AFAE-78221901506B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "xcuitest-sample-projUITests/SampleAppUITests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "testAllowCameraPermissions()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C838D7E2-CAEA-4D0A-BE2E-BD15A9F56DF0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "xcuitest-sample-projUITests/Foundations/BaseTest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "setUp()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C838D7E2-CAEA-4D0A-BE2E-BD15A9F56DF0 - e56f399342f491cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "xcuitest_sample_projUITests.BaseTest.setUp() -&gt; ()"
+                  moduleName = "xcuitest-sample-projUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shamanec/repo/xcuitest-sample-proj/xcuitest-sample-projUITests/Foundations/BaseTest.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "C838D7E2-CAEA-4D0A-BE2E-BD15A9F56DF0 - e56f399342f491cb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "xcuitest_sample_projUITests.BaseTest.setUp() -&gt; ()"
+                  moduleName = "xcuitest-sample-projUITests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shamanec/repo/xcuitest-sample-proj/xcuitest-sample-projUITests/Foundations/BaseTest.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "380">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
