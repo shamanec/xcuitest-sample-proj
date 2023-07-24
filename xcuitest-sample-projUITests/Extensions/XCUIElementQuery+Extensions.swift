@@ -14,7 +14,7 @@ extension XCUIElementQuery {
     /// Check if the XCUIElementQuery has no elements
     var isEmpty: Bool { count == 0 }
     
-    // MARK: Return element by predicate methods
+    // MARK: - Return element by predicate methods
     /// Get element where the label exactly matches the provided string
     func element(withLabelMatching text: String) -> XCUIElement {
         return element(matching: NSPredicate(format: "label == %@", text))

@@ -47,7 +47,7 @@ class BasePage {
         self.setReflectionIdleHack(false)
     }
     
-    // MARK: Utility methods
+    // MARK: - Utility methods
     func keyboardVisible() -> Bool {
         let startTime = NSDate().timeIntervalSince1970
         while (NSDate().timeIntervalSince1970 - startTime) < TestConstants.Timeout.medium {
@@ -82,7 +82,7 @@ class BasePage {
         app.buttons["OK"].tap()
     }
     
-    func tabCancel() {
+    func tapCancel() {
         app.buttons["Cancel"].tap()
     }
 }

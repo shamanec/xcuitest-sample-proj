@@ -8,7 +8,6 @@
 import XCTest
 
 extension XCUIApplication {
-    
     /// Tap the zero coordinate of the app, useful for closing keyboards or triggering UIApplicationMonitor
     func tapZero() { coordinate(withNormalizedOffset: .zero).tap() }
 }

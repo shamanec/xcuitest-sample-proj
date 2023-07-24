@@ -34,6 +34,7 @@ final class SampleAppUITests: BaseTest {
         let firstPage = FirstPage(app: getApp())
         let text = firstPage.carouselItems.lastMatch.label
         print("The label of the last matching element in the carousel is `\(text)`")
+        XCTAssertFalse(text == "Item 1")
     }
     
     func testElementDisappearsSameScreen() {
@@ -59,7 +60,7 @@ final class SampleAppUITests: BaseTest {
         let elements = secondPage.loadingElements
         // Wait for 10 seconds to have 5 elements, should pass
         Elements.waitUntilTableFilled(elements, 5, TestConstants.Timeout.medium)
-        // Wait 5 more seconds to have 6 elements, should fail because only 5 in total will be loaded
+        // Should fail because only 5 in total will be loaded
         Elements.waitUntilTableFilled(elements, 6, TestConstants.Timeout.short)
     }
     
