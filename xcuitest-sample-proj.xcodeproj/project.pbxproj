@@ -10,7 +10,7 @@
 		FF4D5CB02A68033C00B52624 /* ElementsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4D5CAF2A68033C00B52624 /* ElementsHelper.swift */; };
 		FF79C1EC2A66F1B700BBC60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF79C1EB2A66F1B700BBC60A /* Assets.xcassets */; };
 		FF79C1EF2A66F1B700BBC60A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF79C1EE2A66F1B700BBC60A /* Preview Assets.xcassets */; };
-		FF79C2032A66F1B700BBC60A /* xcuitest_sample_projUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2022A66F1B700BBC60A /* xcuitest_sample_projUITests.swift */; };
+		FF79C2032A66F1B700BBC60A /* SampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2022A66F1B700BBC60A /* SampleAppUITests.swift */; };
 		FF79C27F2A66F3A000BBC60A /* XCUIElement+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C27E2A66F3A000BBC60A /* XCUIElement+Extensions.swift */; };
 		FF79C2812A66F45200BBC60A /* XCUIElementQuery+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2802A66F45200BBC60A /* XCUIElementQuery+Extensions.swift */; };
 		FF79C2832A66F54E00BBC60A /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF79C2822A66F54E00BBC60A /* BaseTest.swift */; };
@@ -53,7 +53,7 @@
 		FF79C1EE2A66F1B700BBC60A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FF79C1F42A66F1B700BBC60A /* xcuitest-sample-projTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "xcuitest-sample-projTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF79C1FE2A66F1B700BBC60A /* xcuitest-sample-projUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "xcuitest-sample-projUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF79C2022A66F1B700BBC60A /* xcuitest_sample_projUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xcuitest_sample_projUITests.swift; sourceTree = "<group>"; };
+		FF79C2022A66F1B700BBC60A /* SampleAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAppUITests.swift; sourceTree = "<group>"; };
 		FF79C27E2A66F3A000BBC60A /* XCUIElement+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Extensions.swift"; sourceTree = "<group>"; };
 		FF79C2802A66F45200BBC60A /* XCUIElementQuery+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElementQuery+Extensions.swift"; sourceTree = "<group>"; };
 		FF79C2822A66F54E00BBC60A /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 				FF79C2872A66F9E500BBC60A /* Helpers */,
 				FF79C2842A66F71100BBC60A /* Props */,
 				FF79C27D2A66F31800BBC60A /* Extensions */,
-				FF79C2022A66F1B700BBC60A /* xcuitest_sample_projUITests.swift */,
+				FF79C2022A66F1B700BBC60A /* SampleAppUITests.swift */,
 				FFF034A22A6D687400A33E97 /* README.md */,
 			);
 			path = "xcuitest-sample-projUITests";
@@ -357,7 +357,7 @@
 			files = (
 				FF79C2832A66F54E00BBC60A /* BaseTest.swift in Sources */,
 				FFF034932A6CFEA200A33E97 /* SecondPage.swift in Sources */,
-				FF79C2032A66F1B700BBC60A /* xcuitest_sample_projUITests.swift in Sources */,
+				FF79C2032A66F1B700BBC60A /* SampleAppUITests.swift in Sources */,
 				FFF034952A6D027B00A33E97 /* TabBar.swift in Sources */,
 				FF79C2892A66F9F500BBC60A /* InteractionHelper.swift in Sources */,
 				FF4D5CB02A68033C00B52624 /* ElementsHelper.swift in Sources */,

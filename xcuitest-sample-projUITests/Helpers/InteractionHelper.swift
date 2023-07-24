@@ -81,13 +81,13 @@ class InteractionHelper {
     static func performGentleSwipeUntil(_ element: XCUIElement, _ swipeDirection: TestConstants.Direction, _ maxNumberOfSwipes: UInt, _ swipeAdjustment: CGFloat = TestConstants.SwipeAdjustment.normal, until condition: @autoclosure () -> Bool ) {
         var success = false
         for _ in 1...maxNumberOfSwipes {
-            guard !condition() else {
+            if condition() {
                 success = true
                 break
             }
             performGentleSwipe(element, swipeDirection, swipeAdjustment)
             
-            // to avoid performing an extra scroll when the conditions fails since the previous scroll didn't end yet
+            // to avoid performing an extra scroll when the condition fails because the previous scroll didn't end yet
             sleep(1)
         }
         XCTAssertTrue(success, "Condition was not satisfied swiping \(maxNumberOfSwipes) times in \(self) with swipe adjustment \(swipeAdjustment)")
@@ -121,7 +121,7 @@ class InteractionHelper {
                 element.swipeRight()
             }
             
-            // to avoid performing an extra scroll when the conditions fails since the previous scroll didn't end yet
+            // to avoid performing an extra scroll when the condition fails because the previous scroll didn't end yet
             sleep(1)
         }
         XCTAssertTrue(success, "Condition was not satisfied swiping \(maxNumberOfSwipes) times in \(self)")

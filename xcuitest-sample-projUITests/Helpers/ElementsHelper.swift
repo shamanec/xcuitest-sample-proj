@@ -12,8 +12,8 @@ class ElementsHelper: XCTest {
     ///
     /// - Parameters:
     ///   - elements: XCUIElementQuery that will be polled
-    ///   - timeoutValue: How long to wait until the condition is met
     ///   - elementsCount: Minimum number of elements to expect in the XCUIElementQuery
+    ///   - timeoutValue: How long to wait until the condition is met
     /// - Returns: Boolean value if the condition was met and the query has at least the X number of elements
     static func waitUntilTableFilled(_ elements: XCUIElementQuery,
                                     _ elementsCount: Int = 1,
@@ -47,7 +47,7 @@ class ElementsHelper: XCTest {
     ///
     /// - Parameters:
     ///   - element: XCUIElement that will be polled until it disappears
-    ///   - timeoutValue: How long to poll the XCUIElement until it disappears
+    ///   - timeoutValue: How long to wait for the element to disappear
     static func waitUntilElementDisappears(_ element: XCUIElement, _ timeoutValue: Double) {
         let startTime = Date().timeIntervalSince1970
         var elementVisible = true
@@ -59,7 +59,7 @@ class ElementsHelper: XCTest {
             }
             usleep(300_000) // 300ms
         }
-        XCTAssertFalse(elementVisible, "\(element) is still visible after \(timeoutValue) seconds")
+        XCTAssertFalse(elementVisible, "\(element) is still visible(exists) after \(timeoutValue) seconds")
     }
     
     /// Validate the relative position of the first element to the second element
