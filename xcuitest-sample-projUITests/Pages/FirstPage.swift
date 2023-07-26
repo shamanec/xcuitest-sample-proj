@@ -17,4 +17,5 @@ class FirstPage: BasePage {
     var slider: XCUIElement { app.sliders["slider"] }
     var picker: XCUIElement { app.pickers["picker"] }
     var pickerWheel: XCUIElement { picker.pickerWheels.firstMatch }
+    var triggerAlertButton: XCUIElement { app.buttons["alert-button"] }
 }

@@ -42,8 +42,36 @@ class Elements {
         start.press(forDuration: 0.05, thenDragTo: end)
     }
     
+    /// Set a picker to a specific value
     static func setPickerValue(_ element: XCUIElement, _ value: String) {
         element.adjust(toPickerWheelValue: value)
+    }
+    
+    // MARK: - App alerts handling
+    /// Handle application alert by element and targetting specific button
+    static func handleAppAlert(_ alert: XCUIElement, _ button: String) {
+        XCTAssertTrue(waitForElement(alert, TestConstants.Timeout.medium), "The provided alert element was not found")
+        var alertButton: XCUIElement
+        if button == "" {
+            alertButton = alert.buttons.firstMatch
+            XCTAssertTrue(alertButton.exists, "No button was found in the presented alert")
+        } else {
+            alertButton = alert.buttons[button]
+            XCTAssertTrue(alertButton.exists, "No button with identifier: `\(button)` was found in the presented alert")
+        }
+        alertButton.tap()
+        Elements.waitUntilElementDisappears(alertButton, 2)
+    }
+    
+    /// Handle application alert targetting specific button
+    static func handleAppAlert(_ button: String) {
+        let alert = BaseTest().getApp().alerts.firstMatch
+        handleAppAlert(alert, button)
+    }
+    
+    /// Agnostically handle application alert - just wait for alert and tap the first button on it
+    static func handleAppAlert() {
+        handleAppAlert("")
     }
     
     // MARK: - Wait functions

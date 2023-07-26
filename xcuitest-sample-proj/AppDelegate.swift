@@ -43,9 +43,10 @@ struct CarouselView: View {
     @State var sliderValue: Double = .zero
     @State var selectedDate = Date()
     @State var selectedPickerValue = "None"
+    @State private var showingAlert = false
     
     var body: some View {
-        VStack {
+        ScrollView {
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 16) {
                     ForEach(1...10, id: \.self) { index in
@@ -104,6 +105,23 @@ struct CarouselView: View {
             .pickerStyle(.wheel)
             .frame(height: 150)
             .accessibilityIdentifier("picker")
+            .border(.black)
+            
+            Spacer()
+                .frame(height: 30)
+            
+            Button("Show Alert") {
+                showingAlert = true
+            }
+            .foregroundColor(.white)
+            .padding()
+            .frame(width: 200, height: 50)
+            .background(Color.blue)
+            .cornerRadius(12)
+            .accessibilityIdentifier("alert-button")
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("This is an alert"), message: Text("Please take care!"), primaryButton: .default(Text("Accept")), secondaryButton: .cancel(Text("Close")))
+            }
         }
     }
     
