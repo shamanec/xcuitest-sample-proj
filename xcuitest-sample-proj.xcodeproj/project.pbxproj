@@ -19,6 +19,7 @@
 		FF7C55402A6EF2DA00102A71 /* LaunchArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7C553F2A6EF2DA00102A71 /* LaunchArgumentTests.swift */; };
 		FF86799B2A69699D00C4A1A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86799A2A69699D00C4A1A7 /* AppDelegate.swift */; };
 		FF86799E2A696BDC00C4A1A7 /* CarouselItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF86799D2A696BDC00C4A1A7 /* CarouselItemView.swift */; };
+		FFED40FE2A714284005B0940 /* Sliders in Frameworks */ = {isa = PBXBuildFile; productRef = FFED40FD2A714284005B0940 /* Sliders */; };
 		FFF0348F2A6CFA6500A33E97 /* FirstPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF0348E2A6CFA6500A33E97 /* FirstPage.swift */; };
 		FFF034912A6CFA8B00A33E97 /* BasePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034902A6CFA8B00A33E97 /* BasePage.swift */; };
 		FFF034932A6CFEA200A33E97 /* SecondPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF034922A6CFEA200A33E97 /* SecondPage.swift */; };
@@ -79,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFED40FE2A714284005B0940 /* Sliders in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +227,9 @@
 			dependencies = (
 			);
 			name = "xcuitest-sample-proj";
+			packageProductDependencies = (
+				FFED40FD2A714284005B0940 /* Sliders */,
+			);
 			productName = "xcuitest-sample-proj";
 			productReference = FF79C1E42A66F1B600BBC60A /* xcuitest-sample-proj.app */;
 			productType = "com.apple.product-type.application";
@@ -297,6 +302,9 @@
 				Base,
 			);
 			mainGroup = FF79C1DB2A66F1B600BBC60A;
+			packageReferences = (
+				FFED40FC2A714284005B0940 /* XCRemoteSwiftPackageReference "swiftui-sliders" */,
+			);
 			productRefGroup = FF79C1E52A66F1B600BBC60A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -683,6 +691,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FFED40FC2A714284005B0940 /* XCRemoteSwiftPackageReference "swiftui-sliders" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:spacenation/swiftui-sliders.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FFED40FD2A714284005B0940 /* Sliders */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFED40FC2A714284005B0940 /* XCRemoteSwiftPackageReference "swiftui-sliders" */;
+			productName = Sliders;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF79C1DC2A66F1B600BBC60A /* Project object */;
 }

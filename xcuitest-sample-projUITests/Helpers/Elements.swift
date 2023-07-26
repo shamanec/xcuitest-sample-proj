@@ -34,6 +34,18 @@ class Elements {
         XCTAssertTrue(result, "\(firstElement) is not in `\(relativePosition)` relative position to \(secondElement)")
     }
     
+    /// Set a slider element to specific value when `adjust(toNormalizedSliderPosition: value)` doesn't work
+    /// The adjustment is based on the slider coordinates, absolute fidelity is not guaranteed.
+    static func setSlider(_ element: XCUIElement, _ value: CGFloat) {
+        let start = element.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.0))
+        let end = element.coordinate(withNormalizedOffset: CGVector(dx: value, dy: 0.0))
+        start.press(forDuration: 0.05, thenDragTo: end)
+    }
+    
+    static func setPickerValue(_ element: XCUIElement, _ value: String) {
+        element.adjust(toPickerWheelValue: value)
+    }
+    
     // MARK: - Wait functions
     
     /// Wait for element to exist

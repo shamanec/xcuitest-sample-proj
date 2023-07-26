@@ -14,4 +14,7 @@ class FirstPage: BasePage {
     var disappearingButton: XCUIElement { app.buttons["disappearing-button"] }
     var textField: XCUIElement { app.textFields["text-field"] }
     var argumentText: XCUIElement { app.staticTexts["argument-text"] }
+    var slider: XCUIElement { app.sliders["slider"] }
+    var picker: XCUIElement { app.pickers["picker"] }
+    var pickerWheel: XCUIElement { picker.pickerWheels.firstMatch }
 }

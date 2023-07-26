@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Sliders
 
 @main
 struct YourAppNameApp: App {
@@ -39,6 +40,9 @@ struct CarouselView: View {
     @StateObject var viewModel = ArgumentTextViewModel()
     @State private var isButtonVisible = true
     @State private var text: String = ""
+    @State var sliderValue: Double = .zero
+    @State var selectedDate = Date()
+    @State var selectedPickerValue = "None"
     
     var body: some View {
         VStack {
@@ -86,6 +90,20 @@ struct CarouselView: View {
                         viewModel.displayText = "Custom"
                     }
                 }
+            
+            Slider(value: $sliderValue, in: 0...1)
+                .frame(width: 300, height: 50)
+                .accessibilityIdentifier("slider")
+            
+            let pickerValues = ["None", "Little", "Medium", "Normal", "More", "Many"]
+            Picker("", selection: $selectedPickerValue) {
+                ForEach(pickerValues, id: \.self) {
+                    Text($0)
+                }
+            }
+            .pickerStyle(.wheel)
+            .frame(height: 150)
+            .accessibilityIdentifier("picker")
         }
     }
     

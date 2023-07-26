@@ -95,4 +95,17 @@ final class SampleAppUITests: BaseTest {
         let firstPage = FirstPage(app: getApp())
         XCTAssertEqual(firstPage.argumentText.label, "Argument:Default")
     }
+    
+    func testSelectPickerWheelValue() {
+        let firstPage = FirstPage(app: getApp())
+        XCTAssertEqual(firstPage.pickerWheel.textFromValue, "None")
+        Elements.setPickerValue(firstPage.pickerWheel, "Many")
+        XCTAssertEqual(firstPage.pickerWheel.textFromValue, "Many")
+    }
+    
+    func testSetSliderPosition() {
+        let firstPage = FirstPage(app: getApp())
+        Elements.setSlider(firstPage.slider, 0.8)
+        print(firstPage.slider.textFromValue)
+    }
 }
