@@ -24,4 +24,33 @@ extension XCUIElement {
         // This can lead to problems and test flakiness as the test will evaluate a query before e.g. view transition has been completed.
         return exists && isHittable
     }
+    
+    func isFullyVisible(_ kbPresent: Bool = false) -> Bool {
+        let appFrame = BaseTest().getApp().frame
+        let navBar = BaseTest().getApp().navigationBars.firstMatch
+        let tabBar = BaseTest().getApp().tabBars.firstMatch
+        
+        var visFrameMinY: CGFloat
+        if navBar.exists {
+            visFrameMinY = navBar.frame.maxY
+        } else {
+            visFrameMinY = appFrame.minY
+        }
+        
+        var visFrameMaxY: CGFloat
+        if kbPresent {
+            if BaseTest().getApp().keyboards.firstMatch.exists {
+                visFrameMaxY = BaseTest().getApp().keyboards.firstMatch.frame.minY
+            } else {
+                visFrameMaxY = tabBar.frame.minY
+            }
+        } else {
+            visFrameMaxY = tabBar.frame.minY
+        }
+        
+        return self.frame.minX >= appFrame.minX &&
+        self.frame.maxX <= appFrame.maxX &&
+        self.frame.minY >= visFrameMinY &&
+        self.frame.maxY <= visFrameMaxY
+    }
 }

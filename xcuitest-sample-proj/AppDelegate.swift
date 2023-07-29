@@ -47,6 +47,17 @@ struct CarouselView: View {
     
     var body: some View {
         ScrollView {
+            let pickerValues = ["None", "Little", "Medium", "Normal", "More", "Many"]
+            Picker("", selection: $selectedPickerValue) {
+                ForEach(pickerValues, id: \.self) {
+                    Text($0)
+                }
+            }
+            .pickerStyle(.wheel)
+            .frame(height: 150)
+            .accessibilityIdentifier("picker")
+            .border(.black)
+            
             ScrollView(.horizontal) {
                 LazyHStack(spacing: 16) {
                     ForEach(1...10, id: \.self) { index in
@@ -95,17 +106,6 @@ struct CarouselView: View {
             Slider(value: $sliderValue, in: 0...1)
                 .frame(width: 300, height: 50)
                 .accessibilityIdentifier("slider")
-            
-            let pickerValues = ["None", "Little", "Medium", "Normal", "More", "Many"]
-            Picker("", selection: $selectedPickerValue) {
-                ForEach(pickerValues, id: \.self) {
-                    Text($0)
-                }
-            }
-            .pickerStyle(.wheel)
-            .frame(height: 150)
-            .accessibilityIdentifier("picker")
-            .border(.black)
             
             Spacer()
                 .frame(height: 30)

@@ -50,7 +50,7 @@ class Elements {
     // MARK: - App alerts handling
     /// Handle application alert by element and targetting specific button
     static func handleAppAlert(_ alert: XCUIElement, _ button: String) {
-        XCTAssertTrue(waitForElement(alert, TestConstants.Timeout.medium), "The provided alert element was not found")
+        XCTAssertTrue(waitForElement(alert, TestConstants.Timeout.medium), "Alert element was not found")
         var alertButton: XCUIElement
         if button == "" {
             alertButton = alert.buttons.firstMatch

@@ -128,4 +128,11 @@ final class SampleAppUITests: BaseTest {
         firstPage.triggerAlertButton.tap()
         Elements.handleAppAlert("")
     }
+    
+    func testElementFullyVisible() {
+        let firstPage = FirstPage(app: getApp())
+        print(firstPage.triggerAlertButton.isFullyVisible())
+        getApp().swipeUp()
+        print(firstPage.triggerAlertButton.isFullyVisible())
+    }
 }
