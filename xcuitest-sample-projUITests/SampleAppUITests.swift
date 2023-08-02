@@ -112,21 +112,21 @@ final class SampleAppUITests: BaseTest {
     func testCloseAppAlertWithAlertAndButtonName() {
         let firstPage = FirstPage(app: getApp())
         firstPage.triggerAlertButton.tap()
-        Elements.handleAppAlert(getApp().alerts.firstMatch, "Close")
+        Alerts.handleAppAlert(getApp().alerts.firstMatch, "Close")
     }
     
     func testCloseAppAlertWithButtonName() {
         let firstPage = FirstPage(app: getApp())
         firstPage.triggerAlertButton.tap()
-        Elements.handleAppAlert("Close")
+        Alerts.handleAppAlert("Close")
         firstPage.triggerAlertButton.tap()
-        Elements.handleAppAlert("Accept")
+        Alerts.handleAppAlert("Accept")
     }
     
     func testCloseAppAlertAgnostic() {
         let firstPage = FirstPage(app: getApp())
         firstPage.triggerAlertButton.tap()
-        Elements.handleAppAlert("")
+        Alerts.handleAppAlert("")
     }
     
     func testElementFullyVisible() {
