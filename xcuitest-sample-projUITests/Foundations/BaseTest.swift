@@ -13,6 +13,9 @@ class BaseTest: XCTestCase {
     private let device = XCUIDevice.shared
     
     override func setUp() {
+        // Fail-fast tests
+        continueAfterFailure = false
+        
         guard let testName = cleanedTestName else {
             XCTFail("Could not clean current test name")
             return
@@ -23,8 +26,6 @@ class BaseTest: XCTestCase {
             deleteApp()
         }
         
-        // Fail-fast tests
-        continueAfterFailure = false
         // Start the AUT
         app.launchArguments = launchArguments()
         app.launch()
@@ -83,41 +84,45 @@ class BaseTest: XCTestCase {
         device.press(.home)
     }
     
+    func terminateApp() {
+        app.terminate()
+        XCTAssertEqual(app.state, .notRunning, "App was not successfully terminated")
+    }
+    
     /// This function allows to delete the app between tests - to trigger permission alerts again for example
     func deleteApp() {
-        app.terminate()
+        let appName = "SampleApp"
+        Logger.log("Deleting application '\(appName)'")
+        let appIcon = springboard.icons[appName]
+        
+        // Attempt killing the app just in case
+        terminateApp()
+        // Go to the initial springboard screen
         pressHomeButton()
         
+        // Wait for the Settings app icon to appear before swiping to search for the AUT
         let settingsIcon = springboard.icons["Settings"]
-        
         if Elements.waitForElement(settingsIcon, 2) {
             // Sleep for half a second after finding the settings button because sometimes it swipes before finishing transition to initial springboard screen
             usleep(500_000) // 0.5 seconds
-            springboard.swipeLeft()
+            Interactions.performSwipeUntil(springboard, .left, 2, until: appIcon.exists && appIcon.isHittable)
         }
-        
-        let appName = "SampleApp"
-        let icon = springboard.icons[appName]
-        let iconExists = Elements.waitForElement(icon, TestConstants.Timeout.short)
-        
-        guard iconExists else { return }
-        
-        icon.press(forDuration: TestConstants.Timeout.short)
+        appIcon.press(forDuration: TestConstants.Timeout.veryShort)
         
         let editHomeScreenAlert = springboard.alerts["Edit Home Screens"]
         if Elements.waitForElement(editHomeScreenAlert, 1) {
-            let editHomeScreenAlertButton = editHomeScreenAlert.buttons["OK"]
-            editHomeScreenAlertButton.tap()
+            Alerts.handleSystemAlert(editHomeScreenAlert, "OK")
         }
         
         let deleteAppButton = springboard.icons[appName].buttons["DeleteButton"]
-        deleteAppButton.tap()
+        if Elements.waitForElement(deleteAppButton, 5) {
+            deleteAppButton.tap()
+        } else {
+            XCTFail("Delete application button did not appear in 5 seconds")
+        }
         
-        let additional_confirmation = springboard.alerts["Remove “\(appName)”?"].buttons["Delete App"]
-        additional_confirmation.tap()
-        
-        let deleteConfirmation = springboard.alerts["Delete “\(appName)”?"].buttons["Delete"]
-        deleteConfirmation.tap()
+        Alerts.handleSystemAlert("Remove “\(appName)”?", "Delete App")
+        Alerts.handleSystemAlert("Delete “\(appName)”?", "Delete")
         pressHomeButton()
     }
     

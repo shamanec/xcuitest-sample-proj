@@ -59,10 +59,13 @@ class Alerts {
     
     /// Handle system alert by text displayed in title or description and also specific button label
     static func handleSystemAlert(_ text: String, _ button: String) {
-        let alert = BaseTest().getSpringboardApp().alerts.firstMatch
-        if alert.staticTexts.element(withLabelContaining: text).exists {
-            handleSystemAlert(alert, button)
-            return
+        let alerts = BaseTest().getSpringboardApp().alerts
+        for i in 0...alerts.count {
+            let currentAlert = alerts.element(boundBy: i)
+            if currentAlert.staticTexts.element(withLabelContaining: text).exists {
+                handleSystemAlert(currentAlert, button)
+                return
+            }
         }
         XCTFail("There was no alert found that contains text: \(text)")
     }
@@ -79,6 +82,6 @@ class Alerts {
             XCTAssertTrue(alertButton.exists, "No button with identifier: `\(button)` was found in the presented alert")
         }
         alertButton.tap()
-        Elements.waitUntilElementDisappears(alert, 2)
+        Elements.waitUntilElementDisappears(alertButton, 2)
     }
 }
