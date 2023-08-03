@@ -73,22 +73,43 @@ final class SampleAppUITests: BaseTest {
         XCTAssertEqual(textToType, typedText)
     }
     
-    func testAllowCameraPermissions() {
-        handleCameraAlert(allow: true)
+    func testAllowCameraPermissionsWithInterruptionMonitor() {
+        // Set up UIInterruptionMonitor
+        handleAlert(button: "OK")
         let navigation = TabBar(app: getApp())
         navigation.openThirdPage()
-        XCTAssertTrue(getSpringboardApp().alerts.count == 0)
         let thirdPage = ThirdPage(app: getApp())
+        // Tap the text element, couldn't properly build triggering permissions with navigation ;D
+        thirdPage.permissionState.tap()
+        // Tap the zero coordinates of the app to trigger the interruption monitor on the alert that appeared
+        getApp().tapZero()
+        XCTAssertTrue(getSpringboardApp().alerts.count == 0)
         XCTAssertEqual(thirdPage.getPermissionState(), "Allowed")
     }
     
-    func testDenyCameraPermissions() {
+    func testDenyCameraPermissionsWithInteruptionMonitor() {
+        // Set up UIInterruptionMonitor
         handleCameraAlert(allow: false)
         let navigation = TabBar(app: getApp())
         navigation.openThirdPage()
-        XCTAssertTrue(getSpringboardApp().alerts.count == 0)
         let thirdPage = ThirdPage(app: getApp())
+        // Tap the text element, couldn't properly build triggering permissions with navigation ;D
+        thirdPage.permissionState.tap()
+        // Tap the zero coordinates of the app to trigger the interruption monitor on the alert that appeared
+        getApp().tapZero()
+        XCTAssertTrue(getSpringboardApp().alerts.count == 0)
         XCTAssertEqual(thirdPage.getPermissionState(), "Denied")
+    }
+    
+    func testAllowCameraPermissionsWithCustomAlertHandling() {
+        let navigation = TabBar(app: getApp())
+        navigation.openThirdPage()
+        let thirdPage = ThirdPage(app: getApp())
+        // Tap the text element, couldn't properly build triggering permissions with navigation ;D
+        thirdPage.permissionState.tap()
+        Alerts.handleSystemAlert("OK")
+        XCTAssertTrue(getSpringboardApp().alerts.count == 0)
+        XCTAssertEqual(thirdPage.getPermissionState(), "Allowed")
     }
     
     func testLaunchArgumentNotProvided() {

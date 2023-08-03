@@ -16,15 +16,19 @@ class BaseTest: XCTestCase {
         // Fail-fast tests
         continueAfterFailure = false
         
+        // Reset camera permissions
+        app.resetAuthorizationStatus(for: .camera)
+        
         guard let testName = cleanedTestName else {
             XCTFail("Could not clean current test name")
             return
         }
         
-        if testName.contains("Permissions") {
-            app.terminate()
-            deleteApp()
-        }
+        // This can be used to delete the app for specific tests in case that is needed for the particular test scenario
+//        if testName.contains("Permissions") {
+//            app.terminate()
+//            deleteApp()
+//        }
         
         // Start the AUT
         app.launchArguments = launchArguments()
@@ -60,10 +64,14 @@ class BaseTest: XCTestCase {
         print(app.debugDescription)
     }
     
+    // When an alert or other modal UI is an expected part of the test workflow, don't write a UI interruption monitor.
+    // The test won’t use the monitor because the modal UI isn’t blocking the test.
+    // A UI test only tries its UI interruption monitors if the elements it needs to interact with to complete the test are blocked by an interruption from an unrelated UI.
+    // https://developer.apple.com/documentation/xctest/xctestcase/handling_ui_interruptions
     /// Accept or deny camera permissions
     func handleCameraAlert(allow: Bool) {
         // Add UI interruption monitor to handle system alerts
-        addUIInterruptionMonitor(withDescription: "System Alert") { (alert) -> Bool in
+        addUIInterruptionMonitor(withDescription: "System Alert") { alert -> Bool in
             // Check if the alert is the one you want to handle (e.g., camera permission alert)
             if alert.label.contains("Camera") {
                 if allow {
@@ -80,13 +88,36 @@ class BaseTest: XCTestCase {
         }
     }
     
+    // When an alert or other modal UI is an expected part of the test workflow, don't write a UI interruption monitor.
+    // The test won’t use the monitor because the modal UI isn’t blocking the test.
+    // A UI test only tries its UI interruption monitors if the elements it needs to interact with to complete the test are blocked by an interruption from an unrelated UI.
+    // https://developer.apple.com/documentation/xctest/xctestcase/handling_ui_interruptions
+    func handleAlert(title: String, button: String) {
+        addUIInterruptionMonitor(withDescription: "Alert") { alert -> Bool in
+            var targetButton: XCUIElement
+            if !title.isEmpty && alert.label.contains(title) {
+                targetButton = alert.buttons[button]
+            } else {
+                targetButton = alert.buttons[button]
+            }
+            if targetButton.exists {
+                targetButton.tap()
+            }
+            return true
+        }
+    }
+    
+    func handleAlert(button: String) {
+        handleAlert(title: "", button: button)
+    }
+    
     func pressHomeButton() {
         device.press(.home)
     }
     
     func terminateApp() {
         app.terminate()
-        XCTAssertEqual(app.state, .notRunning, "App was not successfully terminated")
+        XCTAssert(app.wait(for: .notRunning, timeout: 2), "App was not successfully terminated")
     }
     
     /// This function allows to delete the app between tests - to trigger permission alerts again for example

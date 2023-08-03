@@ -8,7 +8,7 @@
 import XCTest
 
 class ThirdPage: BasePage {
-    private var permissionState: XCUIElement { app.staticTexts["permission-state"] }
+    var permissionState: XCUIElement { app.staticTexts["permission-state"] }
     
     func getPermissionState() -> String {
         return permissionState.label

@@ -16,8 +16,7 @@ struct CameraPermissionsRequestView: View {
             Text(cameraPermissionsStatus == .allowed ? "Allowed" : "Denied")
                 .padding()
                 .accessibilityIdentifier("permission-state")
-            Text("")
-                .onAppear {
+                .onTapGesture {
                     checkCameraPermissions()
                 }
         }

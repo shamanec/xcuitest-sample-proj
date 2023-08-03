@@ -18,20 +18,22 @@ struct YourAppNameApp: App {
 }
 
 struct TabBarView: View {
+    @State private var selectedTab: Int = 0
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             CarouselView()
                 .tabItem {
                     Label("Carousel", systemImage: "star")
-                }
+                }.tag(0)
             LoadingElementsView()
                 .tabItem {
                     Label("Loading", systemImage: "star")
-                }
+                }.tag(1)
             CameraPermissionsRequestView()
                 .tabItem {
                     Label("Permissions", systemImage: "camera")
-                }
+                }.tag(2)
         }
     }
 }

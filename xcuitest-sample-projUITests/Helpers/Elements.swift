@@ -73,7 +73,7 @@ class Elements {
         XCTAssertFalse(elementVisible, "Element is still visible(exists) after \(timeoutValue) seconds")
     }
     
-    /// Wait until an XCUIElementQuery has at least X number of elements
+    /// Wait until an XCUIElementQuery has at least X number of elements - polls each 300ms for the supplied timeout duration
     ///
     /// - Parameters:
     ///   - elements: XCUIElementQuery that will be polled
@@ -96,7 +96,22 @@ class Elements {
         XCTAssertTrue(result, "XCUIElementQuery was not filled with \(elementsCount) elements in \(timeoutValue) seconds")
     }
     
-    func waitForElementHittableAttributeToBe(_ element: XCUIElement, _ timeoutValue: Double, _ visibility: Bool) {
+    /// Wait for element to exist polling each 100ms for the supplied timeout duration. Can be faster than other approaches
+    static func waitForElementExistence(_ element: XCUIElement, _ timeoutValue: Double) {
+        var result = false
+        let startTime = Date().timeIntervalSince1970
+        
+        while (Date().timeIntervalSince1970 - startTime) < timeoutValue {
+            if element.exists {
+                result = true
+                break
+            }
+            usleep(100_000) // 100ms
+        }
+        XCTAssertTrue(result, "Element does not exist after \(timeoutValue) seconds")
+    }
+    
+    static func waitForElementHittableAttributeToBe(_ element: XCUIElement, _ timeoutValue: Double, _ visibility: Bool) {
         let predicate = "hittable == \(String(visibility))"
         let isDisplayedPredicate = NSPredicate(format: predicate)
         let expectation = [XCTNSPredicateExpectation(predicate: isDisplayedPredicate, object: element)]
@@ -104,7 +119,7 @@ class Elements {
         XCTAssertEqual(result, .completed, "Element is not displayed and/or hittable after \(timeoutValue) seconds")
     }
     
-    func waitForElementEnabledAttributeToBe(_ element: XCUIElement, _ timeoutValue: Double, _ enabledValue: Bool) {
+    static func waitForElementEnabledAttributeToBe(_ element: XCUIElement, _ timeoutValue: Double, _ enabledValue: Bool) {
         let predicate = "isEnabled == \(String(enabledValue))"
         let isEnabledPredicate = NSPredicate(format: predicate)
         let expectation = [XCTNSPredicateExpectation(predicate: isEnabledPredicate, object: element)]
@@ -112,7 +127,7 @@ class Elements {
         XCTAssertEqual(result, .completed, "Element is not enabled after \(timeoutValue) seconds")
     }
     
-    func waitForElementExistenceToBe(_ element: XCUIElement, _ timeoutValue: Double, _ existence: Bool) {
+    static func waitForElementExistenceToBe(_ element: XCUIElement, _ timeoutValue: Double, _ existence: Bool) {
         let predicate = "exists == \(String(existence))"
         let existsPredicate = NSPredicate(format: predicate)
         let expectation = [XCTNSPredicateExpectation(predicate: existsPredicate, object: element)]
@@ -120,7 +135,7 @@ class Elements {
         XCTAssertEqual(result, .completed, "Element does not exist after \(timeoutValue) seconds")
     }
     
-    func waitForElementLabelAttributeToBe(_ element: XCUIElement, _ timeoutValue: Double, _ labelValue: String) {
+    static func waitForElementLabelAttributeToBe(_ element: XCUIElement, _ timeoutValue: Double, _ labelValue: String) {
         let predicate = "label == '\(String(labelValue))'"
         let labelEqualsPredicate = NSPredicate(format: predicate)
         let expectation = [XCTNSPredicateExpectation(predicate: labelEqualsPredicate, object: element)]
@@ -128,7 +143,7 @@ class Elements {
         XCTAssertEqual(result, .completed, "Element label value is not '\(labelValue)' after \(timeoutValue) seconds")
     }
     
-    func waitForElementValueAttributeContains(_ element: XCUIElement, _ timeoutValue: Double, _ value: String) {
+    static func waitForElementValueAttributeContains(_ element: XCUIElement, _ timeoutValue: Double, _ value: String) {
         let valueContainsPredicate = NSPredicate(format: "value CONTAINS[c] %@", value)
         let expectation = [XCTNSPredicateExpectation(predicate: valueContainsPredicate, object: element)]
         let result = XCTWaiter().wait(for: expectation, timeout: timeoutValue)
