@@ -7,6 +7,6 @@
 
 import XCTest
 
-class SecondPage: BasePage {
+class SecondScreen: BaseScreen {
     var loadingElements: XCUIElementQuery { app.staticTexts.matching(identifier: "loaded-el") }
 }

@@ -13,7 +13,7 @@ class LaunchArgumentTests: BaseTest {
     }
     
     func testLaunchArgument() {
-        let firstPage = FirstPage(app: getApp())
+        let firstPage = FirstScreen()
         XCTAssertEqual(firstPage.argumentText.label, "Argument:Custom")
     }
 }

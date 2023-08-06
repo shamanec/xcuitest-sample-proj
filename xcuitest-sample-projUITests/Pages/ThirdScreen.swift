@@ -7,7 +7,7 @@
 
 import XCTest
 
-class ThirdPage: BasePage {
+class ThirdScreen: BaseScreen {
     var permissionState: XCUIElement { app.staticTexts["permission-state"] }
     
     func getPermissionState() -> String {

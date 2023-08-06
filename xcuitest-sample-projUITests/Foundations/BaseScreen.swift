@@ -7,12 +7,12 @@
 
 import XCTest
 
-class BasePage {
+class BaseScreen {
     var app: XCUIApplication
     private static var isReflectionIdleEnabled = false
     
-    init(app: XCUIApplication) {
-        self.app = app
+    init() {
+        self.app = BaseTest().getApp()
     }
     
     // MARK: - Reflection idle hack code
@@ -27,10 +27,10 @@ class BasePage {
             return
         }
         
-        if state != BasePage.isReflectionIdleEnabled {
+        if state != BaseScreen.isReflectionIdleEnabled {
             method_exchangeImplementations(current, replaced)
             print("[UITest] reflection idle hack " + (state ? "set" : "unset"))
-            BasePage.isReflectionIdleEnabled = state
+            BaseScreen.isReflectionIdleEnabled = state
         }
     }
     

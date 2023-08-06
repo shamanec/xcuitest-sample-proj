@@ -8,56 +8,51 @@
 import XCTest
 
 final class SampleAppUITests: BaseTest {
+    let firstScreen = FirstScreen()
+    let secondScreen = SecondScreen()
+    let tabBar = TabBar()
+    let thirdScreen = ThirdScreen()
+    
     func testGentleSwipeUntil() {
-        let firstPage = FirstPage(app: getApp())
-        Interactions.performGentleSwipeUntil(firstPage.carousel, .left, 5, until: firstPage.carouselItems.element(matching: NSPredicate(format: "label CONTAINS[c] 'Item 10'")).exists)
+        Interactions.performGentleSwipeUntil(firstScreen.carousel, .left, 5, until: firstScreen.carouselItems.element(matching: NSPredicate(format: "label CONTAINS[c] 'Item 10'")).exists)
     }
     
     func testGenericSwipeUntil() {
-        let firstPage = FirstPage(app: getApp())
-        Interactions.performSwipeUntil(firstPage.carousel, .left, 3, until: firstPage.carouselItems["Item 10"].exists)
+        Interactions.performSwipeUntil(firstScreen.carousel, .left, 3, until: firstScreen.carouselItems["Item 10"].exists)
     }
     
     func testElementToElementPositionPass() {
-        let firstPage = FirstPage(app: getApp())
         // This should pass
-        Elements.validateElementToElementPosition(firstPage.carouselItems["Item 2"], firstPage.carouselItems["Item 3"], .leftOf)
+        Elements.validateElementToElementPosition(firstScreen.carouselItems["Item 2"], firstScreen.carouselItems["Item 3"], .leftOf)
     }
     
     func testElementToElementPositionFail() {
-        let firstPage = FirstPage(app: getApp())
         // This should fail
-        Elements.validateElementToElementPosition(firstPage.carouselItems["Item 2"], firstPage.carouselItems["Item 3"], .rightOf)
+        Elements.validateElementToElementPosition(firstScreen.carouselItems["Item 2"], firstScreen.carouselItems["Item 3"], .rightOf)
     }
     
     func testGetLastMatchFromQuery() {
-        let firstPage = FirstPage(app: getApp())
-        let text = firstPage.carouselItems.lastMatch.label
+        let text = firstScreen.carouselItems.lastMatch.label
         print("The label of the last matching element in the carousel is `\(text)`")
         XCTAssertFalse(text == "Item 1")
     }
     
     func testElementDisappearsSameScreen() {
-        let firstPage = FirstPage(app: getApp())
-        XCTAssertTrue(firstPage.disappearingButton.isVisible)
-        firstPage.disappearingButton.tap()
-        Elements.waitUntilElementDisappears(firstPage.disappearingButton, 6)
-        XCTAssertFalse(firstPage.disappearingButton.isVisible)
+        XCTAssertTrue(firstScreen.disappearingButton.isVisible)
+        firstScreen.disappearingButton.tap()
+        Elements.waitUntilElementDisappears(firstScreen.disappearingButton, 6)
+        XCTAssertFalse(firstScreen.disappearingButton.isVisible)
     }
     
     func testElementNotExistChangeScreens() {
-        let firstPage = FirstPage(app: getApp())
-        XCTAssertTrue(firstPage.disappearingButton.isVisible)
-        let navigation = TabBar(app: getApp())
-        navigation.openSecondPage()
-        XCTAssertFalse(firstPage.disappearingButton.exists)
+        XCTAssertTrue(firstScreen.disappearingButton.isVisible)
+        tabBar.openSecondPage()
+        XCTAssertFalse(firstScreen.disappearingButton.exists)
     }
     
     func testWaitForQueryHaveNumberOfElements() {
-        let navigation = TabBar(app: getApp())
-        navigation.openSecondPage()
-        let secondPage = SecondPage(app: getApp())
-        let elements = secondPage.loadingElements
+        tabBar.openSecondPage()
+        let elements = secondScreen.loadingElements
         // Wait for 10 seconds to have 5 elements, should pass
         Elements.waitUntilTableFilled(elements, 5, TestConstants.Timeout.medium)
         // Should fail because only 5 in total will be loaded
@@ -65,96 +60,82 @@ final class SampleAppUITests: BaseTest {
     }
     
     func testTypeText() {
-        let firstPage = FirstPage(app: getApp())
         let textToType = "typed-text"
-        firstPage.textField.tap()
-        firstPage.textField.typeText(textToType)
-        let typedText = firstPage.textField.textFromValue
+        firstScreen.textField.tap()
+        firstScreen.textField.typeText(textToType)
+        let typedText = firstScreen.textField.textFromValue
         XCTAssertEqual(textToType, typedText)
     }
     
     func testAllowCameraPermissionsWithInterruptionMonitor() {
         // Set up UIInterruptionMonitor
         handleAlert(button: "OK")
-        let navigation = TabBar(app: getApp())
-        navigation.openThirdPage()
-        let thirdPage = ThirdPage(app: getApp())
+        tabBar.openThirdPage()
         // Tap the text element, couldn't properly build triggering permissions with navigation ;D
-        thirdPage.permissionState.tap()
+        thirdScreen.permissionState.tap()
         // Tap the zero coordinates of the app to trigger the interruption monitor on the alert that appeared
         getApp().tapZero()
         XCTAssertTrue(getSpringboardApp().alerts.count == 0)
-        XCTAssertEqual(thirdPage.getPermissionState(), "Allowed")
+        XCTAssertEqual(thirdScreen.getPermissionState(), "Allowed")
     }
     
     func testDenyCameraPermissionsWithInteruptionMonitor() {
         // Set up UIInterruptionMonitor
         handleCameraAlert(allow: false)
-        let navigation = TabBar(app: getApp())
-        navigation.openThirdPage()
-        let thirdPage = ThirdPage(app: getApp())
+        tabBar.openThirdPage()
         // Tap the text element, couldn't properly build triggering permissions with navigation ;D
-        thirdPage.permissionState.tap()
+        thirdScreen.permissionState.tap()
         // Tap the zero coordinates of the app to trigger the interruption monitor on the alert that appeared
         getApp().tapZero()
         XCTAssertTrue(getSpringboardApp().alerts.count == 0)
-        XCTAssertEqual(thirdPage.getPermissionState(), "Denied")
+        XCTAssertEqual(thirdScreen.getPermissionState(), "Denied")
     }
     
     func testAllowCameraPermissionsWithCustomAlertHandling() {
-        let navigation = TabBar(app: getApp())
-        navigation.openThirdPage()
-        let thirdPage = ThirdPage(app: getApp())
+        tabBar.openThirdPage()
         // Tap the text element, couldn't properly build triggering permissions with navigation ;D
-        thirdPage.permissionState.tap()
+        thirdScreen.permissionState.tap()
         Alerts.handleSystemAlert("OK")
         XCTAssertTrue(getSpringboardApp().alerts.count == 0)
-        XCTAssertEqual(thirdPage.getPermissionState(), "Allowed")
+        XCTAssertEqual(thirdScreen.getPermissionState(), "Allowed")
     }
     
     func testLaunchArgumentNotProvided() {
-        let firstPage = FirstPage(app: getApp())
-        XCTAssertEqual(firstPage.argumentText.label, "Argument:Default")
+        XCTAssertEqual(firstScreen.argumentText.label, "Argument:Default")
     }
     
     func testSelectPickerWheelValue() {
-        let firstPage = FirstPage(app: getApp())
-        XCTAssertEqual(firstPage.pickerWheel.textFromValue, "None")
-        Elements.setPickerValue(firstPage.pickerWheel, "Many")
-        XCTAssertEqual(firstPage.pickerWheel.textFromValue, "Many")
+        XCTAssertEqual(firstScreen.pickerWheel.textFromValue, "None")
+        Elements.setPickerValue(firstScreen.pickerWheel, "Many")
+        XCTAssertEqual(firstScreen.pickerWheel.textFromValue, "Many")
     }
     
     func testSetSliderPosition() {
-        let firstPage = FirstPage(app: getApp())
-        Elements.setSlider(firstPage.slider, 0.8)
-        print(firstPage.slider.textFromValue)
+        Elements.setSlider(firstScreen.slider, 0.8)
+        print(firstScreen.slider.textFromValue)
     }
     
     func testCloseAppAlertWithAlertAndButtonName() {
-        let firstPage = FirstPage(app: getApp())
-        firstPage.triggerAlertButton.tap()
+        firstScreen.triggerAlertButton.tap()
         Alerts.handleAppAlert(getApp().alerts.firstMatch, "Close")
     }
     
     func testCloseAppAlertWithButtonName() {
-        let firstPage = FirstPage(app: getApp())
-        firstPage.triggerAlertButton.tap()
+        firstScreen.triggerAlertButton.tap()
         Alerts.handleAppAlert("Close")
-        firstPage.triggerAlertButton.tap()
+        firstScreen.triggerAlertButton.tap()
         Alerts.handleAppAlert("Accept")
     }
     
     func testCloseAppAlertAgnostic() {
-        let firstPage = FirstPage(app: getApp())
-        firstPage.triggerAlertButton.tap()
+        firstScreen.triggerAlertButton.tap()
         Alerts.handleAppAlert("")
     }
     
     func testElementFullyVisible() {
-        let firstPage = FirstPage(app: getApp())
-        print(firstPage.triggerAlertButton.isFullyVisible())
+        print(firstScreen.triggerAlertButton.isFullyVisible())
         getApp().swipeUp()
-        print(firstPage.triggerAlertButton.isFullyVisible())
+        print(firstScreen.triggerAlertButton.isFullyVisible())
     }
     
     func testAppActions() {

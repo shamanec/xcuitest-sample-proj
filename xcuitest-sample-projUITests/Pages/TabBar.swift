@@ -7,7 +7,7 @@
 
 import XCTest
 
-class TabBar: BasePage {
+class TabBar: BaseScreen {
     private var defaultTabBar: XCUIElement { app }
     private var firstPageButton: XCUIElement { defaultTabBar.buttons["Carousel"] }
     private var secondPageButton: XCUIElement { defaultTabBar.buttons["Loading"] }

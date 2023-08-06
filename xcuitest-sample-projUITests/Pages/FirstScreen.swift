@@ -7,7 +7,7 @@
 
 import XCTest
 
-class FirstPage: BasePage {
+class FirstScreen: BaseScreen {
     
     var carousel: XCUIElement { app.scrollViews.matching(identifier: "carousel-view").firstMatch }
     var carouselItems: XCUIElementQuery { carousel.staticTexts }
