@@ -111,52 +111,6 @@ class BaseTest: XCTestCase {
         handleAlert(title: "", button: button)
     }
     
-    func pressHomeButton() {
-        device.press(.home)
-    }
-    
-    func terminateApp() {
-        app.terminate()
-        XCTAssert(app.wait(for: .notRunning, timeout: 2), "App was not successfully terminated")
-    }
-    
-    /// This function allows to delete the app between tests - to trigger permission alerts again for example
-    func deleteApp() {
-        let appName = "SampleApp"
-        Logger.log("Deleting application '\(appName)'")
-        let appIcon = springboard.icons[appName]
-        
-        // Attempt killing the app just in case
-        terminateApp()
-        // Go to the initial springboard screen
-        pressHomeButton()
-        
-        // Wait for the Settings app icon to appear before swiping to search for the AUT
-        let settingsIcon = springboard.icons["Settings"]
-        if Elements.waitForElement(settingsIcon, 2) {
-            // Sleep for half a second after finding the settings button because sometimes it swipes before finishing transition to initial springboard screen
-            usleep(500_000) // 0.5 seconds
-            Interactions.performSwipeUntil(springboard, .left, 2, until: appIcon.exists && appIcon.isHittable)
-        }
-        appIcon.press(forDuration: TestConstants.Timeout.veryShort)
-        
-        let editHomeScreenAlert = springboard.alerts["Edit Home Screens"]
-        if Elements.waitForElement(editHomeScreenAlert, 1) {
-            Alerts.handleSystemAlert(editHomeScreenAlert, "OK")
-        }
-        
-        let deleteAppButton = springboard.icons[appName].buttons["DeleteButton"]
-        if Elements.waitForElement(deleteAppButton, 5) {
-            deleteAppButton.tap()
-        } else {
-            XCTFail("Delete application button did not appear in 5 seconds")
-        }
-        
-        Alerts.handleSystemAlert("Remove “\(appName)”?", "Delete App")
-        Alerts.handleSystemAlert("Delete “\(appName)”?", "Delete")
-        pressHomeButton()
-    }
-    
     ///
     private var cleanedTestName: String? {
         let testName = self.name

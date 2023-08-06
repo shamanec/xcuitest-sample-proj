@@ -21,6 +21,7 @@ struct TestConstants {
      - longExtran = 50.0
      */
     enum Timeout {
+        static let second = 1.0
         static let veryShort = 3.0
         static let short = 5.0
         static let medium = 10.0

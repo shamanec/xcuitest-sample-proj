@@ -156,4 +156,16 @@ final class SampleAppUITests: BaseTest {
         getApp().swipeUp()
         print(firstPage.triggerAlertButton.isFullyVisible())
     }
+    
+    func testAppActions() {
+        App.background()
+        sleep(1)
+        App.foreground()
+        sleep(1)
+        App.terminate()
+        sleep(1)
+        App.restart()
+        sleep(1)
+        App.deleteAndRestart()
+    }
 }

@@ -45,7 +45,7 @@ class Alerts {
             XCTAssertTrue(alertButton.exists, "No button with identifier: `\(button)` was found in the presented alert")
         }
         alertButton.tap()
-        Elements.waitUntilElementDisappears(alert, 2)
+        Elements.waitUntilElementDisappears(alert, TestConstants.Timeout.veryShort)
     }
     
     // MARK: - System alerts handling
@@ -75,7 +75,7 @@ class Alerts {
     
     /// Handle system alert by element and targetting specific button
     static func handleSystemAlert(_ alert: XCUIElement, _ button: String) {
-        Elements.waitForElementExistence(alert, 5)
+        Elements.waitForElementExistence(alert, TestConstants.Timeout.short)
         var alertButton: XCUIElement
         if button == "" {
             alertButton = alert.buttons.firstMatch
@@ -85,6 +85,6 @@ class Alerts {
             XCTAssertTrue(alertButton.exists, "No button with identifier: `\(button)` was found in the presented alert")
         }
         alertButton.tap()
-        Elements.waitUntilElementDisappears(alertButton, 2)
+        Elements.waitUntilElementDisappears(alertButton, TestConstants.Timeout.veryShort)
     }
 }

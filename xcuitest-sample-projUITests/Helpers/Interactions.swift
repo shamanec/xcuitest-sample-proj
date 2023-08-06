@@ -8,6 +8,11 @@
 import XCTest
 
 class Interactions {
+    /// Press the device home button
+    static func pressHomeButton() {
+        XCUIDevice.shared.press(.home)
+    }
+    
     /// Performs drag and drop actions on non-hittable elements
     ///
     /// - Parameters:
