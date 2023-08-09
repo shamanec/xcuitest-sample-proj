@@ -40,7 +40,14 @@ final class SampleAppUITests: BaseTest {
     func testElementDisappearsSameScreen() {
         XCTAssertTrue(firstScreen.disappearingButton.isVisible)
         firstScreen.disappearingButton.tap()
-        Elements.waitUntilElementDisappears(firstScreen.disappearingButton, 6)
+        Elements.waitForElementExistence(firstScreen.disappearingButton, 6, false)
+        XCTAssertFalse(firstScreen.disappearingButton.isVisible)
+    }
+    
+    func testElementDisappearsSameScreen2() {
+        XCTAssertTrue(firstScreen.disappearingButton.isVisible)
+        firstScreen.disappearingButton.tap()
+        Elements.waitForElementExistenceAlt(firstScreen.disappearingButton, 6, false)
         XCTAssertFalse(firstScreen.disappearingButton.isVisible)
     }
     
@@ -148,5 +155,9 @@ final class SampleAppUITests: BaseTest {
         App.restart()
         sleep(1)
         App.deleteAndRestart()
+    }
+    
+    func testWaitForElementBySuppliedPredicate()  {
+        Elements.waitForElementPredicate(firstScreen.carousel, 2, NSPredicate(format: "exists == false"))
     }
 }
