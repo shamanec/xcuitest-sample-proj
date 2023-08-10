@@ -11,8 +11,9 @@ extension XCUIElement {
     /// Get the text from the value property of an element
     var textFromValue: String? { value as? String }
     
-    /// Performs tap on non-hittable element by coordinates
-    func tapNonHittable() {
+    /// Performs tap on element by its coordinates.
+    /// Suitable for tapping on non-hittable elements
+    func tapByCoordinates() {
         let coordinate = self.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         coordinate.tap()
     }
