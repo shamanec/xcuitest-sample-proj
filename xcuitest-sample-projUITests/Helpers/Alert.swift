@@ -7,7 +7,7 @@
 
 import XCTest
 
-class Alerts {
+class Alert {
     private static let app = BaseTest().getApp()
     private static let springboard = BaseTest().getSpringboardApp()
     
@@ -35,7 +35,7 @@ class Alerts {
     
     /// Handle application alert by element and targetting specific button
     static func handleAppAlert(_ alert: XCUIElement, _ button: String) {
-        XCTAssertTrue(Elements.waitForElement(alert, TestConstants.Timeout.medium), "Alert element was not found")
+        XCTAssertTrue(Element.waitForElement(alert, TestConstants.Timeout.medium), "Alert element was not found")
         var alertButton: XCUIElement
         if button == "" {
             alertButton = alert.buttons.firstMatch
@@ -45,7 +45,7 @@ class Alerts {
             XCTAssertTrue(alertButton.exists, "No button with identifier: `\(button)` was found in the presented alert")
         }
         alertButton.tap()
-        Elements.waitForElementExistence(alert, TestConstants.Timeout.veryShort, false)
+        Element.waitForElementExistence(alert, TestConstants.Timeout.veryShort, false)
     }
     
     // MARK: - System alerts handling
@@ -75,7 +75,7 @@ class Alerts {
     
     /// Handle system alert by element and targetting specific button
     static func handleSystemAlert(_ alert: XCUIElement, _ button: String) {
-        Elements.waitForElementExistence(alert, TestConstants.Timeout.short, true)
+        Element.waitForElementExistence(alert, TestConstants.Timeout.short, true)
         var alertButton: XCUIElement
         if button == "" {
             alertButton = alert.buttons.firstMatch
@@ -85,6 +85,6 @@ class Alerts {
             XCTAssertTrue(alertButton.exists, "No button with identifier: `\(button)` was found in the presented alert")
         }
         alertButton.tap()
-        Elements.waitForElementExistence(alertButton, TestConstants.Timeout.veryShort, false)
+        Element.waitForElementExistence(alertButton, TestConstants.Timeout.veryShort, false)
     }
 }

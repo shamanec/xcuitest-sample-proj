@@ -7,7 +7,7 @@
 
 import XCTest
 
-class Elements {
+class Element {
     /// Validate the relative position of the first element to the second element
     ///
     /// - Parameters:

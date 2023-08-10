@@ -7,7 +7,7 @@
 
 import XCTest
 
-class Interactions {
+class Interaction {
     /// Press the device home button
     static func pressHomeButton() {
         XCUIDevice.shared.press(.home)

@@ -14,21 +14,21 @@ final class SampleAppUITests: BaseTest {
     let thirdScreen = ThirdScreen()
     
     func testGentleSwipeUntil() {
-        Interactions.performGentleSwipeUntil(firstScreen.carousel, .left, 5, until: firstScreen.carouselItems.element(matching: NSPredicate(format: "label CONTAINS[c] 'Item 10'")).exists)
+        Interaction.performGentleSwipeUntil(firstScreen.carousel, .left, 5, until: firstScreen.carouselItems.element(matching: NSPredicate(format: "label CONTAINS[c] 'Item 10'")).exists)
     }
     
     func testGenericSwipeUntil() {
-        Interactions.performSwipeUntil(firstScreen.carousel, .left, 3, until: firstScreen.carouselItems["Item 10"].exists)
+        Interaction.performSwipeUntil(firstScreen.carousel, .left, 3, until: firstScreen.carouselItems["Item 10"].exists)
     }
     
     func testElementToElementPositionPass() {
         // This should pass
-        Elements.validateElementToElementPosition(firstScreen.carouselItems["Item 2"], firstScreen.carouselItems["Item 3"], .leftOf)
+        Element.validateElementToElementPosition(firstScreen.carouselItems["Item 2"], firstScreen.carouselItems["Item 3"], .leftOf)
     }
     
     func testElementToElementPositionFail() {
         // This should fail
-        Elements.validateElementToElementPosition(firstScreen.carouselItems["Item 2"], firstScreen.carouselItems["Item 3"], .rightOf)
+        Element.validateElementToElementPosition(firstScreen.carouselItems["Item 2"], firstScreen.carouselItems["Item 3"], .rightOf)
     }
     
     func testGetLastMatchFromQuery() {
@@ -40,14 +40,14 @@ final class SampleAppUITests: BaseTest {
     func testElementDisappearsSameScreen() {
         XCTAssertTrue(firstScreen.disappearingButton.isVisible)
         firstScreen.disappearingButton.tap()
-        Elements.waitForElementExistence(firstScreen.disappearingButton, 6, false)
+        Element.waitForElementExistence(firstScreen.disappearingButton, 6, false)
         XCTAssertFalse(firstScreen.disappearingButton.isVisible)
     }
     
     func testElementDisappearsSameScreen2() {
         XCTAssertTrue(firstScreen.disappearingButton.isVisible)
         firstScreen.disappearingButton.tap()
-        Elements.waitForElementExistenceAlt(firstScreen.disappearingButton, 6, false)
+        Element.waitForElementExistenceAlt(firstScreen.disappearingButton, 6, false)
         XCTAssertFalse(firstScreen.disappearingButton.isVisible)
     }
     
@@ -61,9 +61,9 @@ final class SampleAppUITests: BaseTest {
         tabBar.openSecondPage()
         let elements = secondScreen.loadingElements
         // Wait for 10 seconds to have 5 elements, should pass
-        Elements.waitUntilTableFilled(elements, 5, TestConstants.Timeout.medium)
+        Element.waitUntilTableFilled(elements, 5, TestConstants.Timeout.medium)
         // Should fail because only 5 in total will be loaded
-        Elements.waitUntilTableFilled(elements, 6, TestConstants.Timeout.short)
+        Element.waitUntilTableFilled(elements, 6, TestConstants.Timeout.short)
     }
     
     func testTypeText() {
@@ -102,7 +102,7 @@ final class SampleAppUITests: BaseTest {
         tabBar.openThirdPage()
         // Tap the text element, couldn't properly build triggering permissions with navigation ;D
         thirdScreen.permissionState.tap()
-        Alerts.handleSystemAlert("OK")
+        Alert.handleSystemAlert("OK")
         XCTAssertTrue(getSpringboardApp().alerts.count == 0)
         XCTAssertEqual(thirdScreen.getPermissionState(), "Allowed")
     }
@@ -113,30 +113,30 @@ final class SampleAppUITests: BaseTest {
     
     func testSelectPickerWheelValue() {
         XCTAssertEqual(firstScreen.pickerWheel.textFromValue, "None")
-        Elements.setPickerValue(firstScreen.pickerWheel, "Many")
+        Element.setPickerValue(firstScreen.pickerWheel, "Many")
         XCTAssertEqual(firstScreen.pickerWheel.textFromValue, "Many")
     }
     
     func testSetSliderPosition() {
-        Elements.setSlider(firstScreen.slider, 0.8)
+        Element.setSlider(firstScreen.slider, 0.8)
         print(firstScreen.slider.textFromValue)
     }
     
     func testCloseAppAlertWithAlertAndButtonName() {
         firstScreen.triggerAlertButton.tap()
-        Alerts.handleAppAlert(getApp().alerts.firstMatch, "Close")
+        Alert.handleAppAlert(getApp().alerts.firstMatch, "Close")
     }
     
     func testCloseAppAlertWithButtonName() {
         firstScreen.triggerAlertButton.tap()
-        Alerts.handleAppAlert("Close")
+        Alert.handleAppAlert("Close")
         firstScreen.triggerAlertButton.tap()
-        Alerts.handleAppAlert("Accept")
+        Alert.handleAppAlert("Accept")
     }
     
     func testCloseAppAlertAgnostic() {
         firstScreen.triggerAlertButton.tap()
-        Alerts.handleAppAlert("")
+        Alert.handleAppAlert("")
     }
     
     func testElementFullyVisible() {
@@ -158,6 +158,12 @@ final class SampleAppUITests: BaseTest {
     }
     
     func testWaitForElementBySuppliedPredicate()  {
-        Elements.waitForElementPredicate(firstScreen.carousel, 2, NSPredicate(format: "exists == false"))
+        Element.waitForElementPredicate(firstScreen.carousel, 2, NSPredicate(format: "exists == false"))
+    }
+    
+    func testKoleo() {
+        sleep(2)
+        print(getApp().staticTexts["covered-element"].isHittable)
+        print(getApp().staticTexts["covering-element"].isHittable)
     }
 }
