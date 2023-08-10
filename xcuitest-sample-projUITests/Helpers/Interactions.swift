@@ -13,13 +13,13 @@ class Interactions {
         XCUIDevice.shared.press(.home)
     }
     
-    /// Performs drag and drop actions on non-hittable elements
+    /// Performs drag and drop action relative to two elements
     ///
     /// - Parameters:
     ///   - firstElement: The element that will be dragged
     ///   - secondElement: The element which will be used as an end coordinate to drag the first element to
     ///   - pressDuration: How long to press the element to activate the drag and drop functionality before moving it
-    static func dragAndDrop(_ firstElement: XCUIElement, _ secondElement: XCUIElement, _ pressDuration: TimeInterval) {
+    static func dragAndDrop(_ firstElement: XCUIElement, _ secondElement: XCUIElement, _ pressDuration: TimeInterval = 0.5) {
         let startCoordinate = firstElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         let endCoordinate = secondElement.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         startCoordinate.press(forDuration: pressDuration, thenDragTo: endCoordinate)
@@ -84,7 +84,7 @@ class Interactions {
         }
     }
     
-    ///  Swipe until a condition is met, allows to swipe in a specific element
+    ///  Gently swipe until a condition is met, allows to swipe in a specific element
     ///
     ///  **Examples**
     ///  ```
@@ -110,7 +110,7 @@ class Interactions {
         XCTAssertTrue(success, "Condition was not satisfied swiping \(maxNumberOfSwipes) times in \(self) with swipe adjustment \(swipeAdjustment)")
     }
     
-    /// Swipes in app or container until a condition is met
+    /// Swipes in app/element until a condition is met
     ///
     /// **Examples:**
     /// ```

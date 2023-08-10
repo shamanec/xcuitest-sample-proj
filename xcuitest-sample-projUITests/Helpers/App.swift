@@ -16,7 +16,7 @@ class App {
         Logger.log("Putting application in the background")
         Interactions.pressHomeButton()
         // This assert did not work, probably I haven't coded the sample app properly
-        // But it should work
+        // But theoretically should work
         //XCTAssert(app.wait(for: .runningBackground, timeout: TestConstants.Timeout.medium), "App was not put in the background")
     }
     
@@ -59,8 +59,6 @@ class App {
         Logger.log("Deleting application '\(appName)'")
         let appIcon = springboard.icons[appName]
         
-        // Attempt killing the app just in case
-        terminate()
         // Go to the initial springboard screen
         Interactions.pressHomeButton()
         
