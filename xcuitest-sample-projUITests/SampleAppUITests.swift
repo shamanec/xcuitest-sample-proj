@@ -161,9 +161,9 @@ final class SampleAppUITests: BaseTest {
         Element.waitForElementPredicate(firstScreen.carousel, 2, NSPredicate(format: "exists == false"))
     }
     
-    func testKoleo() {
-        sleep(2)
-        print(getApp().staticTexts["covered-element"].isHittable)
-        print(getApp().staticTexts["covering-element"].isHittable)
+    func testQueriesExamples() {
+        tabBar.openFourthPage()
+        printPageSource()
+        // Get descendant element from a parent element by accessibility identifier - variant 1
     }
 }
