@@ -8,38 +8,58 @@
 import SwiftUI
 
 struct QueriesScreenView: View {
+    @State private var updateableTextValue: String = "FirstStackText1"
+    @State private var isButtonVisible = true
+    
     var body: some View {
         ScrollView {
-            AccessibilityGroup(identifier: "first-group") {
-                Text("Descendant 1")
-                    .accessibilityIdentifier("first-stack-text")
-                Text("Descendant 2")
-                    .accessibilityIdentifier("first-stack-text")
-                AccessibilityGroup(identifier: "first-group-child") {
-                    Text("Descendant 3")
-                        .accessibilityIdentifier("first-stack-text")
-                    Text("Descendant 4")
-                        .accessibilityIdentifier("first-stack-text")
-                    AccessibilityGroup(identifier: "first-group-child-child") {
-                        Text("Descendant 5")
-                            .accessibilityIdentifier("first-stack-text")
+            LazyVStack {
+                Text("FirstStackText")
+                    .accessibilityIdentifier("FirstStackText")
+                Text(updateableTextValue)
+                    .accessibilityIdentifier("FirstStackText")
+                    .onTapGesture {
+                        // Change the text value when tapped
+                        updateableTextValue = "Tapped"
                     }
-                    .border(.green)
-                    .padding()
+                LazyVStack {
+                    Text("FirstStackText3")
+                        .accessibilityIdentifier("FirstStackText")
+                    Text("FirstStackText4")
+                        .accessibilityIdentifier("FirstStackText")
+                    Text("FirstStackText5")
+                        .accessibilityIdentifier("FirstStackText")
+                    LazyVStack {
+                        Text("FirstStackText6")
+                            .accessibilityIdentifier("FirstStackText")
+                    }
                 }
-                .border(.blue)
+                .accessibilityIdentifier("FirstStackFirstChildStack")
+                .border(.green)
                 .padding()
             }
             .border(.black)
+            .accessibilityIdentifier("FirstStack")
+            .padding()
             
-            Spacer()
-            
-            AccessibilityGroup(identifier: "second-group") {
-                Text("SECOND STACK")
+            LazyVStack {
+                if isButtonVisible {
+                    Button(action: {
+                        isButtonVisible = false
+                    }) {
+                        LazyVStack{
+                            Image(systemName: "heart.fill")
+                                .accessibilityIdentifier("TestImage")
+                        }
+                    }
+                    .accessibilityIdentifier("SecondStackButton")
+                }
             }
-            .border(.black)
+            .accessibilityIdentifier("SecondStack")
+            
         }
-        .accessibilityIdentifier("queries-view")
+        .accessibilityIdentifier("QueriesScrollView")
+        
     }
 }
 
